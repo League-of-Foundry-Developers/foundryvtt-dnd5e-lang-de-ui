@@ -25,7 +25,7 @@ const handelClick = async(index, name) => {
 	   editorTiny = 'div.description' + index;
 	   tinymce.init({
 		 selector: editorTiny,
-		 plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist powerpaste table advtable tinymcespellchecker',
+		//  plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist powerpaste table advtable tinymcespellchecker',
 		 entity_encoding : "raw",
 		 height: '350',
 		 removed_menuitems: 'newdocument',
