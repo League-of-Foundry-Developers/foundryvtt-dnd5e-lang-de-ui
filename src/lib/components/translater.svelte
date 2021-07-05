@@ -4,6 +4,7 @@
 <script lang="ts">		
 
 import { onMount } from "svelte";
+import Datastore from "nedb";
 
 export let file;
 let items = [];
@@ -66,6 +67,17 @@ onMount(async () => {
 		return Object.assign(value, {id: key})
 	});
 });
+
+// database
+db = new Datastore({ filename: 'src/lib/packs/tradegoods.db' });
+db.loadDatabase(function (error) {   
+  if (error) {
+      console.log('FATAL: local database could not be loaded. Caused by: ' + error);
+      throw error;
+    }
+    console.log('INFO: local database loaded successfully.');
+});
+
 
 </script>
 
