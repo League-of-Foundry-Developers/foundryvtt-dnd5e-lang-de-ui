@@ -116,6 +116,7 @@ onMount(async () => {
 							</div>
 							<div class="de-description">
 								<h3>Orignal Text</h3>								
+									{@html item?.original?.data?.details?.biography?.value ?? ''}	
 								{#if filename === 'Regeln (SRD)'}
 									{@html item?.original?.content}
 								{/if}
@@ -126,6 +127,7 @@ onMount(async () => {
 							<div class="de-source">
 								<h3>Original Page</h3>
 									{item?.original?.data?.source ?? ''}
+									{item?.original?.data?.details?.source ?? ''}
 							</div>
 						</div>
 					</div>
