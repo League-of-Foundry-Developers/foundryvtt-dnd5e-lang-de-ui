@@ -6,10 +6,13 @@
 import { onMount } from "svelte";
 
 export let file;
+export let dbFile;
+
 let items = [];
 let filename = [];
 let editorTiny;
 let inputHTML;
+let dbjson = [];
 
 // safe input
 const handelClick = async(index, name) => {
@@ -62,10 +65,21 @@ onMount(async () => {
 	const response = await fetch('/api.json?file=' + file);
 	const json = await response.json();
 	filename = json.label
+
+	const dbRespronce = await fetch('/api/db.json?file=' + dbFile);
+	dbjson = await dbRespronce.json();
+
 	items = Object.entries(json.entries)
-	.map(([key, value]) => {
-		return Object.assign(value, {id: key})
-	});
+		.map(([key, value]) => {
+			const item =  Object.assign(value, {id: key})
+			item.original = dbjson.find(dbitem => dbitem.name === item.id) || {};
+			return item;
+		});
+
+	console.log(items);
+	console.log(filename);
+	
+
 });
 
 </script>
@@ -83,64 +97,92 @@ onMount(async () => {
 			Foundry VTT DnD5e übersetzung
 		</h1>
 		<h2 class="w-100 f-20 text-center">{filename}</h2>
-		<div class="wrapper">
+		<div class="wrapper space-around">
 			
-			<div class="en-translation">
+			<div class="en">
 				<h2>Englisch</h2>
-			
 			</div>
-			<div class="de-translation">
+			<div class="de">
 				<h2>Deutsch</h2>
-				{#each items as item, i}
-
-				<div class="container">
-
-					<div class="flex">
-						<div class="en-div">
-							<h3>
-								Englisches Original
-							</h3>
-							<p>
-							{item.id}
-							</p>
-						</div>
-						<div class="de-div">
-							<h3>
-								Deutsche übersetzung
-							</h3>
-								<input type="text" id="{item.id}" name="dtname" bind:value="{item.name}" disabled={!shown.name[i]}>
-								<button on:click={() => handelClick(i, 'name')} class="btn">
-									{shown.name[i] ?'safe' : 'Edit'}
-								</button>
+			</div>
+		</div>
+		<div>
+			{#each items as item, i}
+				<div class="flex">
+					<div class="en-translation">
+						<div class="container">
+							<div class="en-div">
+								<h3>Orignal Name</h3>
+								{item.original.name}
+							</div>
+							<div class="de-description">
+								<h3>Orignal Text</h3>								
+									{@html item?.original?.data?.details?.biography?.value ?? ''}	
+								{#if filename === 'Regeln (SRD)'}
+									{@html item?.original?.content}
+								{/if}
+								{#if filename !== 'Regeln (SRD)'}
+									{@html item?.original?.data?.description?.value ?? ''}
+								{/if}
+							</div>
+							<div class="de-source">
+								<h3>Original Page</h3>
+									{item?.original?.data?.source ?? ''}
+									{item?.original?.data?.details?.source ?? ''}
+							</div>
 						</div>
 					</div>
-						<div class="de-description">
-							<h3>Beschreibung</h3>
-							<div type="text" id="{file + '.description.' + [i]} description-feel"  class="description{i}">{@html item.description}</div>
-							<button on:click={() => handelClick(i, 'desc')} class="btn" id="{file + '.description.' + [i]}">
-								{shown.desc[i] ? 'safe' : 'Edit'}
-							</button>
-						</div>
-						{#if filename === 'Zauber (SRD)'}
-							<div class="de-material">
-								<h3>Verbrauchs Material</h3>
-								<input type="text" id="{file + '.material.' + [i]}" bind:value="{item.material}" disabled={!shown.material[i]}>
-								<button on:click={() => handelClick(i, 'material')} class="btn" id="{file + '.material.' + [i]}">
-									{shown.material[i] ? 'safe' : 'Edit'}
-								</button>
+					<div class="de-translation">			
+						<div class="container">
+		
+							<div class="flex">
+								<div class="en-div">
+									<h3>
+										Englisches Original
+									</h3>
+									<p>
+									{item.id}
+									</p>
+								</div>
+								<div class="de-div">
+									<h3>
+										Deutsche übersetzung
+									</h3>
+										<input type="text" id="{item.id}" name="dtname" bind:value="{item.name}" disabled={!shown.name[i]}>
+										<button on:click={() => handelClick(i, 'name')} class="btn">
+											{shown.name[i] ?'safe' : 'Edit'}
+										</button>
+								</div>
 							</div>
-						{/if}
-						<div class="de-source">
-							<h3>Seite im Buch</h3>
-							<input type="text" id="{'source ' + [i]}" name="dtsource" bind:value="{item.source}" disabled={!shown.source[i]}>
-							<button on:click={() => handelClick(i, 'source')} class="btn">
-								{shown.source[i] ?'safe' : 'Edit'}
-							</button>					
+							<div class="de-description">
+								<h3>Beschreibung</h3>
+									<div type="text" id="{file + '.description.' + [i]} description-feel"  class="description{i}">{@html item?.description ?? ''}</div>
+									<button on:click={() => handelClick(i, 'desc')} class="btn" id="{file + '.description.' + [i]}">
+										{shown.desc[i] ? 'safe' : 'Edit'}
+									</button>
+							</div>
+							{#if filename === 'Zauber (SRD)'}
+								<div class="de-material">
+									<h3>Verbrauchs Material</h3>
+									<input type="text" id="{file + '.material.' + [i]}" bind:value="{item.material}" disabled={!shown.material[i]}>
+									<button on:click={() => handelClick(i, 'material')} class="btn" id="{file + '.material.' + [i]}">
+										{shown.material[i] ? 'safe' : 'Edit'}
+									</button>
+								</div>
+							{/if}
+							<div class="de-source">
+								<h3>Seite im Buch</h3>
+								<input type="text" id="{'source ' + [i]}" name="dtsource" bind:value="{item.source}" disabled={!shown.source[i]}>
+								<button on:click={() => handelClick(i, 'source')} class="btn">
+									{shown.source[i] ?'safe' : 'Edit'}
+								</button>					
+							</div>
 						</div>
+					</div>
+		
 				</div>
+			{/each}
 
-				{/each}
-			</div>
 		</div>
 	</div>
 </section>
@@ -175,13 +217,12 @@ onMount(async () => {
 		padding: 10px;
 		margin-bottom: 10px;
 	}
-
 	.en-translation {
-		width: 480px;
+		flex: 50%;
 	}
 
 	.de-translation {
-		width: 480px;
+		flex: 50%;
 	}
 
 	.de-div {
@@ -192,10 +233,14 @@ onMount(async () => {
 		display: flex;
 		justify-content: space-between;
 	}
-	.flex {
-		display: flex;
-		width: 100%;
-		justify-content: space-between;
+	@media (min-width: 1024px) {
+		.flex {
+			display: flex;
+			width: 100%;
+			gap: 10px;
+		}
 	}
-
+	.space-around {
+		justify-content: space-around;
+	}
 </style>

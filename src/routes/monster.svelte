@@ -5,4 +5,4 @@
 <script lang="ts"> 
 	import Translater from '$lib/components/Translater.svelte'; 
 </script>
-<Translater file="dnd5e.monsters.json"></Translater>
+<Translater file="dnd5e.monsters.json" dbFile="monsters.db"></Translater>
