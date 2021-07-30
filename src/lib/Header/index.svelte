@@ -4,11 +4,7 @@
 </script>
 
 <header>
-	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
-	</div>
+	
 
 	<nav>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -66,6 +62,7 @@
 		display: flex;
 		justify-content: center;
 		--background: rgba(255, 255, 255, 0.7);
+		margin: 0 auto;
 	}
 
 	svg {
@@ -96,6 +93,10 @@
 		height: 100%;
 	}
 
+	li.active {
+		background-color: var(--barbarian);
+	}
+
 	li.active::before {
 		--size: 6px;
 		content: '';
@@ -120,6 +121,14 @@
 		letter-spacing: 10%;
 		text-decoration: none;
 		transition: color 0.2s linear;
+	}
+
+	li.active a {
+		color: #fff;
+	}
+
+	li.active a:hover {
+		color: #000;
 	}
 
 	a:hover {

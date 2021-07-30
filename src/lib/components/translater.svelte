@@ -93,7 +93,7 @@ onMount(async () => {
 	
 	
 	<div class="main">
-		<h1>
+		<h1 class="w-100">
 			Foundry VTT DnD5e übersetzung
 		</h1>
 		<h2 class="w-100 f-20 text-center">{filename}</h2>
@@ -115,7 +115,7 @@ onMount(async () => {
 								<h3>Orignal Name</h3>
 								{item.original.name}
 							</div>
-							<div class="de-description">
+							<div class="description">
 								<h3>Orignal Text</h3>								
 									{@html item?.original?.data?.details?.biography?.value ?? ''}	
 								{#if filename === 'Regeln (SRD)'}
@@ -154,7 +154,7 @@ onMount(async () => {
 										</button>
 								</div>
 							</div>
-							<div class="de-description">
+							<div class="description">
 								<h3>Beschreibung</h3>
 									<div type="text" id="{file + '.description.' + [i]} description-feel"  class="description{i}">{@html item?.description ?? ''}</div>
 									<button on:click={() => handelClick(i, 'desc')} class="btn" id="{file + '.description.' + [i]}">
@@ -188,59 +188,5 @@ onMount(async () => {
 </section>
 
 <style>
-	.main {
-		margin: 0 auto;
-		width: 960px;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.w-100 {
-		width: 100%
-	}
-
-	.f-20 {
-		font-size: 20px;
-	}
-
-	.text-center {
-		text-align: center;
-	}
-	.wrapper {
-		display: flex;
-	}
-	.container {
-		border: 1px solid #000;
-		border-radius: 5px;
-		padding: 10px;
-		margin-bottom: 10px;
-	}
-	.en-translation {
-		flex: 50%;
-	}
-
-	.de-translation {
-		flex: 50%;
-	}
-
-	.de-div {
-		flex: 0 260px;
-	}
-
-	.de-word {
-		display: flex;
-		justify-content: space-between;
-	}
-	@media (min-width: 1024px) {
-		.flex {
-			display: flex;
-			width: 100%;
-			gap: 10px;
-		}
-	}
-	.space-around {
-		justify-content: space-around;
-	}
+	
 </style>

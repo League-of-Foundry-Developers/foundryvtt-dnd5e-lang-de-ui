@@ -12,7 +12,7 @@ When you have interesst to help to Translate, write me on Discord. You find me u
 You have interesst to help to Develop this Project, than fork please this Project and after you work, create Merge Request.
 
 ### ToDo:
-- [ ] use NeDB to load the Origin Datastore
+- [x] use NeDB to load the Origin Datastore
 - [ ] include search Function
 - [ ] only login user can write translation, with log
 - [ ] rework design. Color, Responsive, ...

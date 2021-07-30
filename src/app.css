@@ -11,6 +11,24 @@
 	--accent-color: #ff3e00;
 	--heading-color: rgba(0, 0, 0, 0.7);
 	--text-color: #444444;
+	/* custom color */
+	/* color theme from d&d beyond */
+	--paper-color: #E8DCB8;
+	--ddb-red: #c73032;
+	--barbarian: #e7623e;
+	--bad-rogue: #ab6dac;
+	--cleric-silver: #91a1b2;
+	--druid-moss: #7a853b;
+	--fighter-rust: #7f513e;
+	--monk-sky: #51a5c5;
+	--paladin-gold: #b59e54;
+	--ranger-em: #507f62;
+	--rogue-ash: #555752;
+	--sorcerer-blood: #992e2e;
+	--warlock-iris: #7b469b;
+	--wizard-cobalt: #2a50a1;
+
+
 	--background-without-opacity: rgba(255, 255, 255, 0.7);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
@@ -20,12 +38,6 @@ body {
 	min-height: 100vh;
 	margin: 0;
 	background-color: var(--primary-color);
-	background: linear-gradient(
-		180deg,
-		var(--primary-color) 0%,
-		var(--secondary-color) 10.45%,
-		var(--tertiary-color) 41.35%
-	);
 }
 
 body::before {
@@ -78,17 +90,6 @@ h2 {
 	font-size: 1rem;
 }
 
-pre {
-	font-size: 16px;
-	font-family: var(--font-mono);
-	background-color: rgba(255, 255, 255, 0.45);
-	border-radius: 3px;
-	box-shadow: 2px 2px 6px rgb(255 255 255 / 25%);
-	padding: 0.5em;
-	overflow-x: auto;
-	color: var(--text-color);
-}
-
 input,
 button {
 	font-size: inherit;
@@ -103,4 +104,107 @@ button:focus:not(:focus-visible) {
 	h1 {
 		font-size: 2.4rem;
 	}
+}
+
+.main {
+	margin: 0 auto;
+	width: 1024px;
+}
+
+.w-100 {
+	width: 100%
+}
+
+.f-20 {
+	font-size: 20px;
+}
+
+.text-center {
+	text-align: center;
+}
+.wrapper {
+	display: flex;
+}
+.container {
+	border: 1px solid #000;
+	border-radius: 35px;
+	padding: 10px 15px 20px;
+	margin-bottom: 10px;
+	box-shadow: 0 0 2px 1px #000;
+	background-color: var(--paper-color);
+}
+.en-translation {
+	flex: 50%;
+}
+
+.de-translation {
+	flex: 50%;
+}
+
+.description {
+	overflow: auto;
+}
+
+.de-div {
+	flex: 0 260px;
+}
+
+.de-word {
+	display: flex;
+	justify-content: space-between;
+}
+@media (min-width: 1024px) {
+	.flex {
+		display: flex;
+		width: 100%;
+		gap: 10px;
+	}
+}
+.space-around {
+	justify-content: space-around;
+}
+
+/* scrollbar styling */
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: var(--cleric-silver); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: var(--rogue-ash); 
+}
+
+/* btn styling */
+.btn {
+	border-radius: 5px;
+	border-color: transparent;
+	background-color: var(--monk-sky);
+	color: rgba(255, 255, 255, 0.829);
+	cursor: pointer;
+	font-weight: bold;
+}
+.btn:hover {
+	background-color: var(--wizard-cobalt);
+}
+
+input:disabled {
+	background-color: transparent;
+	border-color: transparent;
+}
+
+input {
+	background-color: var(--pure-white);
+	border-color: #000;
+	border-radius: 5px;
 }

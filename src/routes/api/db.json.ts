@@ -8,7 +8,7 @@ import Datastore from 'nedb';
 import path from 'path';
 const dirname = path.resolve('./');
 
-const projectRoot = path.join(dirname, dev ? 'static/packs' : 'src/packs');
+const projectRoot = path.join(dirname, dev ? 'static/packs' : 'srv/translator/build/assets/packs');
 
 const fullPath = (filePath) => path.join(projectRoot, filePath);
 
