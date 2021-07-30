@@ -8,26 +8,25 @@ import Datastore from 'nedb';
 import path from 'path';
 const dirname = path.resolve('./');
 
-const projectRoot = path.join(dirname, dev ? '/packs' : 'src/lib/packs');
+const projectRoot = path.join(dirname, dev ? 'static/packs' : 'src/packs');
 
 const fullPath = (filePath) => path.join(projectRoot, filePath);
 
 const readFile:Promise<string> = (filePath:string) => {
+    
     return new Promise((resolve, reject) => {
         const db = new Datastore({ filename: fullPath(filePath), autoload: true });
         db.loadDatabase(function (error) {   
-        if (error) {
-            console.log('FATAL: local database could not be loaded. Caused by: ' + error);
-            return reject(JSON.stringify(error, null, 2));
-        }
-        console.log('INFO: local database loaded successfully.');
-        return resolve(
-            db.find({})
-                .sort({ createdAt: -1 })
-                .exec(function(err, docs) {
-                    data = docs;
-                })
-            );
+            if (error) {
+                console.log('FATAL: local database could not be loaded. Caused by: ' + error);
+                return reject(JSON.stringify(error, null, 2));
+            }
+            console.log('INFO: local database loaded successfully.');
+            db.find({}, function(err, docs) {
+                if(err) return reject(err);
+                    return resolve(JSON.stringify(docs))
+                });
+            
         });
     })
 };
