@@ -5,4 +5,4 @@
 <script lang="ts"> 
 	import Translater from '$lib/components/Translater.svelte'; 
 </script>
-<Translater file="dnd5e.spells.json"></Translater>
+<Translater file="dnd5e.spells.json" dbFile="spells.db"></Translater>
