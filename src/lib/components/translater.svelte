@@ -164,7 +164,7 @@ onMount(async () => {
 							{#if filename === 'Zauber (SRD)'}
 								<div class="de-material">
 									<h3>Verbrauchs Material</h3>
-									<input type="text" id="{file + '.material.' + [i]}" bind:value="{item.material}" disabled={!shown.material[i]}>
+									<textarea type="text" rows="3" cols="50" id="{file + '.material.' + [i]}" bind:value="{item.material}" disabled={!shown.material[i]}></textarea>
 									<button on:click={() => handelClick(i, 'material')} class="btn" id="{file + '.material.' + [i]}">
 										{shown.material[i] ? 'safe' : 'Edit'}
 									</button>
