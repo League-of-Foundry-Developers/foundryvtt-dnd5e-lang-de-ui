@@ -17,13 +17,16 @@ let dbjson = [];
 // safe input
 const handelClick = async(index, name) => {
 	if (shown[name][index]) {
-		if (editorTiny) {
+		if (editorTiny && (tinymce.activeEditor.getContent()).length > 0 ) {
 			console.log((tinymce.activeEditor.getContent()).length);
-			if ((tinymce.activeEditor.getContent()).length > 0) console.log('leer');
+			// if () console.log('leer');
 			
-		} else if (items[index][name]) {
+		} 
+		if (items[index][name]) {
 			if((items[index][name]).length > 0) console.log('leer 2');
-		}
+		} 
+		console.log('safe');
+		
 	}
 	
 	if (shown[name][index]) safeAtJson(items[index]);	
