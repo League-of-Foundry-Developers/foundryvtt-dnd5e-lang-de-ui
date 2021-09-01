@@ -16,6 +16,16 @@ let dbjson = [];
 
 // safe input
 const handelClick = async(index, name) => {
+	if (shown[name][index]) {
+		if (editorTiny) {
+			console.log((tinymce.activeEditor.getContent()).length);
+			if ((tinymce.activeEditor.getContent()).length > 0) console.log('leer');
+			
+		} else if (items[index][name]) {
+			if((items[index][name]).length > 0) console.log('leer 2');
+		}
+	}
+	
 	if (shown[name][index]) safeAtJson(items[index]);	
 	shown[name][index] = !shown[name][index];
 	if (name !== 'desc') return;
@@ -75,10 +85,6 @@ onMount(async () => {
 			item.original = dbjson.find(dbitem => dbitem.name === item.id) || {};
 			return item;
 		});
-
-	console.log(items);
-	console.log(filename);
-	
 
 });
 
