@@ -19,27 +19,33 @@ const handelClick = async(index, name) => {
 	if (shown[name][index]) {
 		if (editorTiny && (tinymce.activeEditor.getContent()).length > 0 ) {
 			console.log((tinymce.activeEditor.getContent()).length);
-			// if () console.log('leer');
-			
+			message = !message;
+			// if () console.log('leer');	
 		} 
 		if (items[index][name]) {
 			if((items[index][name]).length > 0) console.log('leer 2');
 		} 
-		console.log('safe');
-		
+		if (items[index][name] === undefined && !editorTiny || editorTiny && (tinymce.activeEditor.getContent()).length === 0) {
+			console.log('safe');
+		}
 	}
 	
-	if (shown[name][index]) safeAtJson(items[index]);	
+	if (shown[name][index]) safeAtJson(items[index]);
+	safeJson(index, name);
+}
+
+
+function safeJson(index, name) {
 	shown[name][index] = !shown[name][index];
 	if (name !== 'desc') return;
 	if (editorTiny) {
 		tinymce.activeEditor.remove();
 		editorTiny = null;
 		inputHTML = null;
-   }
+	 }
 	if (shown[name][index]) {
-	   editorTiny = 'div.description' + index;
-	   tinymce.init({
+		 editorTiny = 'div.description' + index;
+		 tinymce.init({
 		 selector: editorTiny,
 		 plugins: 'autolink lists advlist table',
 		 toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
@@ -48,6 +54,7 @@ const handelClick = async(index, name) => {
 		 removed_menuitems: 'newdocument',
 		});
 	}
+	
 }
 
 async function safeAtJson(entry) {
@@ -64,6 +71,9 @@ async function safeAtJson(entry) {
 	const result = await fetch(`/api.json`, {method:'POST', body: data});
 	
 }
+
+// message
+let message;
 
 // on click set
 const shown = {
@@ -102,6 +112,11 @@ onMount(async () => {
 	
 	
 	<div class="main">
+		<!-- {#if message} -->
+			<div class="" style="position: absolute;">
+				test
+			</div>
+		<!-- {/if} -->
 		<h1 class="w-100">
 			Foundry VTT DnD5e übersetzung
 		</h1>
