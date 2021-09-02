@@ -114,7 +114,11 @@ onMount(async () => {
 	<div class="main">
 		<!-- {#if message} -->
 			<div class="" style="position: absolute;">
-				test
+				Wollen Sie den Text ändern?
+				<div>
+					<button>ja</button>
+					<button>nein</button>
+				</div>
 			</div>
 		<!-- {/if} -->
 		<h1 class="w-100">
