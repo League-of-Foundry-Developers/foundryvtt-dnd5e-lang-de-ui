@@ -13,25 +13,27 @@ let filename = [];
 let editorTiny;
 let inputHTML;
 let dbjson = [];
+let safeIndex;
 
 // safe input
 const handelClick = async(index, name) => {
 	if (shown[name][index]) {
 		if (editorTiny && (tinymce.activeEditor.getContent()).length > 0 ) {
-			console.log((tinymce.activeEditor.getContent()).length);
 			message = !message;
-			// if () console.log('leer');	
+			safeIndex = items[index];	
 		} 
 		if (items[index][name]) {
-			if((items[index][name]).length > 0) console.log('leer 2');
+			if((items[index][name]).length > 0) {
+				message = !message;
+				safeIndex = items[index];
+			}
 		} 
 		if (items[index][name] === undefined && !editorTiny || editorTiny && (tinymce.activeEditor.getContent()).length === 0) {
-			console.log('safe');
+			safeAtJson(items[index]);
+			safeJson(index, name);
 		}
 	}
-	
-	if (shown[name][index]) safeAtJson(items[index]);
-	safeJson(index, name);
+	if (!shown[name][index]) safeJson(index, name);
 }
 
 
@@ -57,19 +59,42 @@ function safeJson(index, name) {
 	
 }
 
+function dontSafe(entry) {
+	// if (editorTiny) {
+	// 	inputHTML = tinymce.activeEditor.getContent();
+	// 	entry.description = inputHTML;
+	// }
+	// entry.file = file;
+	// console.log(entry);
+	
+	// navigator.clipboard.writeText(JSON.stringify(entry));
+	message = !message;
+	safeIndex;
+	safeJson(index, name);
+
+}
+
 async function safeAtJson(entry) {
+	console.log(entry);
 	
 	if (editorTiny) {
 		inputHTML = tinymce.activeEditor.getContent();
+		console.log(inputHTML);
+		
 		entry.description = inputHTML;
 	}
 	
 	entry.file = file;
+
 	
 	var data = JSON.stringify(entry);
 	// ToDo Try Catcher
 	const result = await fetch(`/api.json`, {method:'POST', body: data});
 	
+	message = !message;
+	safeIndex;
+	safeJson(index, name);
+
 }
 
 // message
@@ -112,17 +137,17 @@ onMount(async () => {
 	
 	
 	<div class="main">
-		<!-- {#if message} -->
+		{#if message}
 			<div class="overlay">
 				<div class="dialog-wp">
 					Wollen Sie den Text ändern?
 					<div class="dialog-btn-wp">
-						<button class="btn btn--spacing">ja</button>
-						<button class="btn btn--spacing btn--color-switch">nein</button>
+						<button on:click={() => safeAtJson(safeIndex)} class="btn btn--spacing">ja</button>
+						<button on:click={() => dontSafe(safeIndex)} class="btn btn--spacing btn--color-switch">nein</button>
 					</div>
 				</div>
 			</div>
-		<!-- {/if} -->
+		{/if}
 		<h1 class="w-100">
 			Foundry VTT DnD5e übersetzung
 		</h1>
