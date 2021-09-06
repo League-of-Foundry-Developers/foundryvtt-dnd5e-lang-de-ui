@@ -113,11 +113,13 @@ onMount(async () => {
 	
 	<div class="main">
 		<!-- {#if message} -->
-			<div class="" style="position: absolute;">
-				Wollen Sie den Text ändern?
-				<div>
-					<button>ja</button>
-					<button>nein</button>
+			<div class="overlay">
+				<div class="dialog-wp">
+					Wollen Sie den Text ändern?
+					<div class="dialog-btn-wp">
+						<button class="btn btn--spacing">ja</button>
+						<button class="btn btn--spacing btn--color-switch">nein</button>
+					</div>
 				</div>
 			</div>
 		<!-- {/if} -->
