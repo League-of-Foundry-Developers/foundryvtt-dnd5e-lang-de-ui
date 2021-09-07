@@ -211,6 +211,14 @@ button:focus:not(:focus-visible) {
 	background-color: var(--sorcerer-blood);
 }
 
+.btn--color-cancel {
+	background-color: var(--ddb-red);
+}
+
+.btn--color-cancel:hover {
+	background-color: var(--accent-color);
+}
+
 input:disabled {
 	background-color: transparent;
 	border-color: transparent;
@@ -241,6 +249,7 @@ textarea {
 /* dialog */
 .overlay {
 	position: fixed;
+	z-index: 2;
     top: 0;
 	right: 0;
 	bottom: 0;

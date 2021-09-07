@@ -14,18 +14,26 @@ let editorTiny;
 let inputHTML;
 let dbjson = [];
 let safeIndex;
+let safeName;
+let safeInput;
 
 // safe input
 const handelClick = async(index, name) => {
 	if (shown[name][index]) {
 		if (editorTiny && (tinymce.activeEditor.getContent()).length > 0 ) {
 			message = !message;
-			safeIndex = items[index];	
+			safeIndex = index;
+			safeName = name;
+			safeInput = items[index];
+			return
 		} 
 		if (items[index][name]) {
 			if((items[index][name]).length > 0) {
 				message = !message;
-				safeIndex = items[index];
+				safeIndex = index;
+				safeName = name;
+				safeInput = items[index];
+				return
 			}
 		} 
 		if (items[index][name] === undefined && !editorTiny || editorTiny && (tinymce.activeEditor.getContent()).length === 0) {
@@ -59,23 +67,28 @@ function safeJson(index, name) {
 	
 }
 
-function dontSafe(entry) {
+function dontSafe(entry, index, name) {
 	// if (editorTiny) {
 	// 	inputHTML = tinymce.activeEditor.getContent();
 	// 	entry.description = inputHTML;
 	// }
 	// entry.file = file;
-	// console.log(entry);
 	
-	// navigator.clipboard.writeText(JSON.stringify(entry));
+	// navigator.clipboard.writeText(JSON.stringify(entry.index));
+
 	message = !message;
-	safeIndex;
 	safeJson(index, name);
+	safeName;
+	safeIndex;
+	safeInput;
 
 }
 
-async function safeAtJson(entry) {
-	console.log(entry);
+function cancelIt() {
+	message = !message;
+}
+
+async function safeAtJson(entry, index, name) {
 	
 	if (editorTiny) {
 		inputHTML = tinymce.activeEditor.getContent();
@@ -92,8 +105,10 @@ async function safeAtJson(entry) {
 	const result = await fetch(`/api.json`, {method:'POST', body: data});
 	
 	message = !message;
-	safeIndex;
 	safeJson(index, name);
+	safeName;
+	safeIndex;
+	safeInput;
 
 }
 
@@ -142,8 +157,9 @@ onMount(async () => {
 				<div class="dialog-wp">
 					Wollen Sie den Text ändern?
 					<div class="dialog-btn-wp">
-						<button on:click={() => safeAtJson(safeIndex)} class="btn btn--spacing">ja</button>
-						<button on:click={() => dontSafe(safeIndex)} class="btn btn--spacing btn--color-switch">nein</button>
+						<button on:click={() => safeAtJson(safeInput, safeIndex, safeName)} class="btn btn--spacing">ja</button>
+						<button on:click={() => dontSafe(safeInput, safeIndex, safeName)} class="btn btn--spacing btn--color-switch">nein</button>
+						<button on:click={() => cancelIt()} class="btn btn--spacing btn--color-cancel">Abbrechen</button>
 					</div>
 				</div>
 			</div>
