@@ -21,27 +21,34 @@ let safeInput;
 const handelClick = async(index, name) => {
 	if (shown[name][index]) {
 		if (editorTiny && (tinymce.activeEditor.getContent()).length > 0 ) {
-			message = !message;
+			showMessage = !showMessage;
 			safeIndex = index;
 			safeName = name;
 			safeInput = items[index];
 			return
 		} 
-		if (items[index][name]) {
-			if((items[index][name]).length > 0) {
-				message = !message;
+		if ((items[index][name] || '').length) {
+				showMessage = !showMessage;
 				safeIndex = index;
 				safeName = name;
 				safeInput = items[index];
 				return
-			}
 		} 
-		if (items[index][name] === undefined && !editorTiny || editorTiny && (tinymce.activeEditor.getContent()).length === 0) {
-			safeAtJson(items[index]);
-			safeJson(index, name);
+		if (items[index][name] === undefined || editorTiny && (tinymce.activeEditor.getContent()).length === 0) {
+			
+			// safeJson(safeIndex, safeName);
 		}
 	}
-	if (!shown[name][index]) safeJson(index, name);
+	if (!shown[name][index]) {
+		safeJson(index, name);
+		return
+	} 
+	console.log('nichts');
+	
+	safeIndex = index;
+	safeName = name;
+	safeInput = items[index];
+	safeAtJson(safeInput, safeIndex, safeName);
 }
 
 
@@ -68,6 +75,7 @@ function safeJson(index, name) {
 }
 
 function dontSafe(entry, index, name) {
+	// ToDo: Include copy to clipboard
 	// if (editorTiny) {
 	// 	inputHTML = tinymce.activeEditor.getContent();
 	// 	entry.description = inputHTML;
@@ -76,24 +84,18 @@ function dontSafe(entry, index, name) {
 	
 	// navigator.clipboard.writeText(JSON.stringify(entry.index));
 
-	message = !message;
+	showMessage = !showMessage;
 	safeJson(index, name);
-	safeName;
-	safeIndex;
-	safeInput;
-
 }
 
 function cancelIt() {
-	message = !message;
+	showMessage = !showMessage;
 }
 
 async function safeAtJson(entry, index, name) {
 	
 	if (editorTiny) {
-		inputHTML = tinymce.activeEditor.getContent();
-		console.log(inputHTML);
-		
+		inputHTML = tinymce.activeEditor.getContent();	
 		entry.description = inputHTML;
 	}
 	
@@ -104,16 +106,12 @@ async function safeAtJson(entry, index, name) {
 	// ToDo Try Catcher
 	const result = await fetch(`/api.json`, {method:'POST', body: data});
 	
-	message = !message;
+	showMessage = !showMessage;
 	safeJson(index, name);
-	safeName;
-	safeIndex;
-	safeInput;
-
 }
 
-// message
-let message;
+// showMessage
+let showMessage;
 
 // on click set
 const shown = {
@@ -152,7 +150,7 @@ onMount(async () => {
 	
 	
 	<div class="main">
-		{#if message}
+		{#if showMessage}
 			<div class="overlay">
 				<div class="dialog-wp">
 					Wollen Sie den Text ändern?
