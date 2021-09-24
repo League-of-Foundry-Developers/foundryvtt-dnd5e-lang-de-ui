@@ -133,7 +133,7 @@ async function safeAtJson(entry, index, name) {
 	
 	
 	
- 	console.log(entry !== oldValue)
+ 	console.log(entry[name] !== newValue)
 	
 	var data = JSON.stringify(entry);
 	// ToDo Try Catcher
