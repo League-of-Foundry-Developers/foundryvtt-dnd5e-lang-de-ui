@@ -16,9 +16,16 @@ let dbjson = [];
 let safeIndex;
 let safeName;
 let safeInput;
+let oldValue;
 
 // safe input
 const handelClick = async(index, name) => {
+	// console.log('index', index);
+	// console.log('name', name);
+	// console.log('json', JSON.stringify([index][name]));
+
+	// console.log('items', items[index][name]);
+	
 	if (shown[name][index]) {
 		if (editorTiny && (tinymce.activeEditor.getContent()).length > 0 ) {
 			showMessage = !showMessage;
@@ -40,6 +47,7 @@ const handelClick = async(index, name) => {
 		}
 	}
 	if (!shown[name][index]) {
+		oldValue = items[index][name];
 		safeJson(index, name);
 		return
 	} 
@@ -100,7 +108,39 @@ async function safeAtJson(entry, index, name) {
 	}
 	
 	entry.file = file;
+	// todo auslagern
+	const response = await fetch('/api.json?file=' + file);
+	const json = await response.json();
+	filename = json.label
 
+	const dbRespronce = await fetch('/api/db.json?file=' + dbFile);
+	dbjson = await dbRespronce.json();
+	
+	console.log('dbRespronce', response);
+	
+	console.log('dbJson', json);
+	
+	const newItems = Object.entries(dbjson.entries)
+		.map(([key, value]) => {
+			const item =  Object.assign(value, {id: key})
+			item.original = dbjson.find(dbitem => dbitem.name === item.id) || {};
+			return item;
+		});
+	//ende todo 
+
+	// vergleich newItems mit 
+	console.log('index', index);
+	console.log('name', name);
+
+	console.log('json entries', json.entries[0]);
+	console.log('newitems', newItems);
+	
+	
+	
+	
+	console.log('ebtry', entry);
+	
+ 	// console.log(newItems[index][name] !== oldValue)
 	
 	var data = JSON.stringify(entry);
 	// ToDo Try Catcher
@@ -129,14 +169,14 @@ onMount(async () => {
 
 	const dbRespronce = await fetch('/api/db.json?file=' + dbFile);
 	dbjson = await dbRespronce.json();
+	
 
 	items = Object.entries(json.entries)
 		.map(([key, value]) => {
 			const item =  Object.assign(value, {id: key})
 			item.original = dbjson.find(dbitem => dbitem.name === item.id) || {};
 			return item;
-		});
-
+		});	
 });
 
 </script>
