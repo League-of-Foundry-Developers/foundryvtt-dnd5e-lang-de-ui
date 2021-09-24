@@ -113,34 +113,27 @@ async function safeAtJson(entry, index, name) {
 	const json = await response.json();
 	filename = json.label
 
-	const dbRespronce = await fetch('/api/db.json?file=' + dbFile);
-	dbjson = await dbRespronce.json();
 	
-	console.log('dbRespronce', response);
-	
-	console.log('dbJson', json);
-	
-	const newItems = Object.entries(dbjson.entries)
-		.map(([key, value]) => {
-			const item =  Object.assign(value, {id: key})
-			item.original = dbjson.find(dbitem => dbitem.name === item.id) || {};
-			return item;
-		});
 	//ende todo 
+	var indexOfEntry = [];
 
-	// vergleich newItems mit 
-	console.log('index', index);
-	console.log('name', name);
+	// build the index
+	for (var x in json.entries) {
+		indexOfEntry.push(x);
+	}
 
-	console.log('json entries', json.entries[0]);
-	console.log('newitems', newItems);
+	const newValue = json.entries[indexOfEntry[index]][name]
+	console.log(typeof json.entries[indexOfEntry[index]][name]);
+	
+	console.log('type oldVa', typeof oldValue);
+	console.log('type entry', typeof entry);
+	console.log('entry', entry);
+	console.log('oldva', oldValue);
 	
 	
 	
 	
-	console.log('ebtry', entry);
-	
- 	// console.log(newItems[index][name] !== oldValue)
+ 	console.log(entry !== oldValue)
 	
 	var data = JSON.stringify(entry);
 	// ToDo Try Catcher
