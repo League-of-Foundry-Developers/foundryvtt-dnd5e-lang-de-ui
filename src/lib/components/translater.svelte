@@ -16,53 +16,36 @@ let dbjson = [];
 let safeIndex;
 let safeName;
 let safeInput;
+let safeEntry;
 let oldValue;
 
 // safe input
 const handelClick = async(index, name) => {
-	// console.log('index', index);
-	// console.log('name', name);
-	// console.log('json', JSON.stringify([index][name]));
 
-	// console.log('items', items[index][name]);
-	
 	if (shown[name][index]) {
-		if (editorTiny && (tinymce.activeEditor.getContent()).length > 0 ) {
-			showMessage = !showMessage;
-			safeIndex = index;
-			safeName = name;
-			safeInput = items[index];
-			return
-		} 
-		if ((items[index][name] || '').length) {
-				showMessage = !showMessage;
-				safeIndex = index;
-				safeName = name;
-				safeInput = items[index];
-				return
-		} 
-		if (items[index][name] === undefined || editorTiny && (tinymce.activeEditor.getContent()).length === 0) {
-			
-			// safeJson(safeIndex, safeName);
-		}
+		showMessage = !showMessage;
+		safeIndex = index;
+		safeName = name;
+		safeInput = items[index];
+		return
 	}
 	if (!shown[name][index]) {
 		oldValue = items[index][name];
 		safeJson(index, name);
 		return
 	} 
-	console.log('nichts');
+	// console.log('nichts');
 	
-	safeIndex = index;
-	safeName = name;
-	safeInput = items[index];
-	safeAtJson(safeInput, safeIndex, safeName);
+	// safeIndex = index;
+	// safeName = name;
+	// safeInput = items[index];
+	// safeAtJson(safeInput, safeIndex, safeName);
 }
 
 
 function safeJson(index, name) {
 	shown[name][index] = !shown[name][index];
-	if (name !== 'desc') return;
+	if (name !== 'description') return;
 	if (editorTiny) {
 		tinymce.activeEditor.remove();
 		editorTiny = null;
@@ -82,6 +65,7 @@ function safeJson(index, name) {
 	
 }
 
+// when use dont want safe
 function dontSafe(entry, index, name) {
 	// ToDo: Include copy to clipboard
 	// if (editorTiny) {
@@ -96,6 +80,7 @@ function dontSafe(entry, index, name) {
 	safeJson(index, name);
 }
 
+// when user cancel the change
 function cancelIt() {
 	showMessage = !showMessage;
 }
@@ -106,7 +91,7 @@ async function safeAtJson(entry, index, name) {
 		inputHTML = tinymce.activeEditor.getContent();	
 		entry.description = inputHTML;
 	}
-	
+
 	entry.file = file;
 	// todo auslagern
 	const response = await fetch('/api.json?file=' + file);
@@ -121,34 +106,37 @@ async function safeAtJson(entry, index, name) {
 	for (var x in json.entries) {
 		indexOfEntry.push(x);
 	}
-
+	
 	const newValue = json.entries[indexOfEntry[index]][name]
-	console.log(typeof json.entries[indexOfEntry[index]][name]);
+ 
+
+	 if (entry[name] !== newValue) {
+		safeEntry = entry;
+		showMessage = !showMessage;
+		showSaveMessage = !showSaveMessage;
+		return 
+	 }
+
+	showMessage = !showMessage;
+	finallySafeToJson(entry, index, name)
+}
 	
-	console.log('type oldVa', typeof oldValue);
-	console.log('type entry', typeof entry);
-	console.log('entry', entry);
-	console.log('oldva', oldValue);
-	
-	
-	
-	
- 	console.log(entry[name] !== newValue)
-	
+async function finallySafeToJson(entry, index, name) {
 	var data = JSON.stringify(entry);
 	// ToDo Try Catcher
 	const result = await fetch(`/api.json`, {method:'POST', body: data});
-	
-	showMessage = !showMessage;
-	safeJson(index, name);
+	showSaveMessage = !showSaveMessage;	 
+
+	safeJson(index, name);	
 }
 
 // showMessage
 let showMessage;
+let showSaveMessage;
 
 // on click set
 const shown = {
-	desc : [],
+	description : [],
 	name: [],
 	material: [],
 	source: [],
@@ -186,10 +174,22 @@ onMount(async () => {
 		{#if showMessage}
 			<div class="overlay">
 				<div class="dialog-wp">
-					Wollen Sie den Text ändern?
+					Wollen Sie den Text speichern?
 					<div class="dialog-btn-wp">
 						<button on:click={() => safeAtJson(safeInput, safeIndex, safeName)} class="btn btn--spacing">ja</button>
 						<button on:click={() => dontSafe(safeInput, safeIndex, safeName)} class="btn btn--spacing btn--color-switch">nein</button>
+						<button on:click={() => cancelIt()} class="btn btn--spacing btn--color-cancel">Abbrechen</button>
+					</div>
+				</div>
+			</div>
+		{/if}
+		{#if showSaveMessage}
+			<div class="overlay">
+				<div class="dialog-wp">
+					Es ist schon Text vorhanden, wollen Sie diesen ändern?
+					<div class="dialog-btn-wp">
+						<button on:click={() => finallySafeToJson(safeEntry, safeIndex, safeName)} class="btn btn--spacing">ja</button>
+						<button on:click={() => dontSafe(safeEntry, safeIndex, safeName)} class="btn btn--spacing btn--color-switch">nein</button>
 						<button on:click={() => cancelIt()} class="btn btn--spacing btn--color-cancel">Abbrechen</button>
 					</div>
 				</div>
@@ -259,8 +259,8 @@ onMount(async () => {
 							<div class="description">
 								<h3>Beschreibung</h3>
 									<div type="text" id="{file + '.description.' + [i]} description-feel"  class="description{i}">{@html item?.description ?? ''}</div>
-									<button on:click={() => handelClick(i, 'desc')} class="btn" id="{file + '.description.' + [i]}">
-										{shown.desc[i] ? 'safe' : 'Edit'}
+									<button on:click={() => handelClick(i, 'description')} class="btn" id="{file + '.description.' + [i]}">
+										{shown.description[i] ? 'safe' : 'Edit'}
 									</button>
 							</div>
 							{#if filename === 'Zauber (SRD)'}
