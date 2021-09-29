@@ -27,6 +27,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.18.0",
     "@fontsource/fira-mono": "^4.5.0",
     "@lukeed/uuid": "^2.0.0",
     "@seald-io/nedb": "^2.0.4",
