@@ -120,12 +120,14 @@ async function safeAtJson(entry, index, name) {
 	showMessage = !showMessage;
 	finallySafeToJson(entry, index, name)
 }
-	
+
+// final safe function
 async function finallySafeToJson(entry, index, name) {
 	var data = JSON.stringify(entry);
 	// ToDo Try Catcher
 	const result = await fetch(`/api.json`, {method:'POST', body: data});
-	showSaveMessage = !showSaveMessage;	 
+	
+	if (showSaveMessage) showSaveMessage = !showSaveMessage;
 
 	safeJson(index, name);	
 }
