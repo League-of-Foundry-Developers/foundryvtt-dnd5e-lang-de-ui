@@ -33,13 +33,7 @@ const handelClick = async(index, name) => {
 		oldValue = items[index][name];
 		safeJson(index, name);
 		return
-	} 
-	// console.log('nichts');
-	
-	// safeIndex = index;
-	// safeName = name;
-	// safeInput = items[index];
-	// safeAtJson(safeInput, safeIndex, safeName);
+	}
 }
 
 
