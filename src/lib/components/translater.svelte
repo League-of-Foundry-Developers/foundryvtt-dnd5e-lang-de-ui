@@ -68,13 +68,6 @@ function safeJson(index, name) {
 // when use dont want safe
 function dontSafe(entry, index, name) {
 	// ToDo: Include copy to clipboard
-	// if (editorTiny) {
-	// 	inputHTML = tinymce.activeEditor.getContent();
-	// 	entry.description = inputHTML;
-	// }
-	// entry.file = file;
-	
-	// navigator.clipboard.writeText(JSON.stringify(entry.index));
 
 	showMessage = !showMessage;
 	safeJson(index, name);
