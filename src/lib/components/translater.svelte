@@ -4,6 +4,7 @@
 <script lang="ts">		
 
 import { onMount } from "svelte";
+import { login, logout, isAuthenticated, user } from "../auto";
 
 export let file;
 export let dbFile;
