@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { isAuthenticated, login } from '$lib/auth';
+import { user } from '$lib/store';
  
 	import Translater from '$lib/components/Translater.svelte'; 
 </script>
@@ -34,6 +35,6 @@ import { isAuthenticated, login } from '$lib/auth';
     </div>
   </div>
   {:else}
-  <p>dddd</p>
+    <div class="text-white">Willkommen {$user.name} ({$user.email})</div>
   {/if}
 </div>

@@ -4,6 +4,7 @@
 <script lang="ts">
 import { onMount } from "svelte";
 import { browser } from "$app/env";
+import { isAuthenticated } from "$lib/auth";
 
 // import type {  } from  "tinymce";
 export let file;
@@ -241,33 +242,41 @@ onMount(async () => {
 										Deutsche übersetzung
 									</h3>
 										<input type="text" id="{item.id}" name="dtname" bind:value="{item.name}" disabled={!shown.name[i]}>
+										{#if $isAuthenticated}
 										<button on:click={() => handelClick(i, 'name')} class="btn">
 											{shown.name[i] ?'safe' : 'Edit'}
 										</button>
+										{/if}
 								</div>
 							</div>
 							<div class="description">
 								<h3>Beschreibung</h3>
 									<div type="text" id="{file + '.description.' + [i]} description-feel"  class="description{i}">{@html item?.description ?? ''}</div>
+									{#if $isAuthenticated}
 									<button on:click={() => handelClick(i, 'description')} class="btn" id="{file + '.description.' + [i]}">
 										{shown.description[i] ? 'safe' : 'Edit'}
 									</button>
+									{/if}
 							</div>
 							{#if filename === 'Zauber (SRD)'}
 								<div class="de-material">
 									<h3>Verbrauchs Material</h3>
 									<textarea type="text" rows="3" cols="50" id="{file + '.material.' + [i]}" bind:value="{item.material}" disabled={!shown.material[i]}></textarea>
+									{#if $isAuthenticated}
 									<button on:click={() => handelClick(i, 'material')} class="btn" id="{file + '.material.' + [i]}">
 										{shown.material[i] ? 'safe' : 'Edit'}
 									</button>
+									{/if}
 								</div>
 							{/if}
 							<div class="de-source">
 								<h3>Seite im Buch</h3>
 								<input type="text" id="{'source ' + [i]}" name="dtsource" bind:value="{item.source}" disabled={!shown.source[i]}>
+								{#if $isAuthenticated}
 								<button on:click={() => handelClick(i, 'source')} class="btn">
 									{shown.source[i] ?'safe' : 'Edit'}
-								</button>					
+								</button>
+								{/if}				
 							</div>
 						</div>
 					</div>
