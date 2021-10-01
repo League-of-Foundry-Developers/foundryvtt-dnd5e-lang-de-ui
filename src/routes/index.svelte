@@ -16,20 +16,10 @@ import { user } from '$lib/store';
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <div class="jumbotron">
-          <h1 class="display-4">Task Management made Easy!</h1>
+          <h2 class="display-4">Task Management made Easy!</h2>
           <p class="lead">Instructions</p>
-          <ul>
-            <li>Login to start &#128272;</li>
-            <li>Create Tasks &#128221;</li>
-            <li>Tick off completed tasks &#9989;</li>
-          </ul>
-          <a
-            class="btn btn-primary btn-lg mr-auto ml-auto"
-            href="/#"
-            role="button"
-            on:click="{login}"
-            >Log In</a
-          >
+      
+          <button class="btn btn--login" on:click="{login}">Log In</button>
         </div>
       </div>
     </div>

@@ -25,13 +25,6 @@ import { user } from '$lib/store';
 			<li class:active={$page.path === '/rules'}><a sveltekit:prefetch href="/rules">Rules</a></li>
 			<li class:active={$page.path === '/spells'}><a sveltekit:prefetch href="/spells">Spells</a></li>
 			<li class:active={$page.path === '/tradegoods'}><a sveltekit:prefetch href="/tradegoods">Tragegoods</a></li>
-			<li class="nav-item">
-			  <a class="nav-link" href="/#" on:click="{logout}">Log Out</a>
-			</li>
-			{:else}
-			<li class="nav-item">
-			  <a class="nav-link" href="/#" on:click="{login}">Log In</a>
-			</li>
 			{/if}
 		</ul>
 
@@ -40,9 +33,12 @@ import { user } from '$lib/store';
 		</svg>
 	</nav>
 
-	<div class="corner">
+	<div class="user-menü nav--btn-wp">
 		{#if $isAuthenticated}
+			<button class="btn btn--nav" on:click="{logout}">Log Out</button>
 		<img class="user-image" alt="user picture" src={$user.picture}>
+		{:else}
+			<button class="btn btn--nav" on:click="{login}">Log In</button>
 		{/if}
 	</div>
 </header>
@@ -51,25 +47,6 @@ import { user } from '$lib/store';
 	header {
 		display: flex;
 		justify-content: space-between;
-	}
-
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
 	}
 
 	nav {

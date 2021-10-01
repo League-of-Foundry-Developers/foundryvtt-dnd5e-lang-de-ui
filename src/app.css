@@ -219,6 +219,19 @@ button:focus:not(:focus-visible) {
 	background-color: var(--accent-color);
 }
 
+.btn--login {
+	padding: 5px;
+}
+
+.btn--nav {
+	border-radius: 0;
+}
+
+.nav--btn-wp {
+	display: flex;
+	margin-left: 2px
+}
+
 input:disabled {
 	background-color: transparent;
 	border-color: transparent;
@@ -276,3 +289,12 @@ textarea {
     margin-top: 10px;
 }
 
+.user-menü {
+	width: 100px;
+	height: 50px;
+    display: flex;
+}
+
+.user-image {
+	border-radius: 50%;
+}
