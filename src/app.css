@@ -289,10 +289,15 @@ textarea {
     margin-top: 10px;
 }
 
-.user-menü {
-	width: 100px;
+.user-menü-login {
+	width: 130px;
 	height: 50px;
     display: flex;
+}
+
+.user-menü-logout {
+	width: 64px;
+	height: 50px;
 }
 
 .user-image {

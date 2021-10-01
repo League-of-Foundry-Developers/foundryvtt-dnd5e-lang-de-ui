@@ -33,14 +33,16 @@ import { user } from '$lib/store';
 		</svg>
 	</nav>
 
-	<div class="user-menü nav--btn-wp">
-		{#if $isAuthenticated}
-			<button class="btn btn--nav" on:click="{logout}">Log Out</button>
+	{#if $isAuthenticated}
+	<div class="user-menü-login nav--btn-wp">
+		<button class="btn btn--nav" on:click="{logout}">Log Out</button>
 		<img class="user-image" alt="user picture" src={$user.picture}>
-		{:else}
-			<button class="btn btn--nav" on:click="{login}">Log In</button>
-		{/if}
 	</div>
+	{:else}
+	<div class="user-menü-logout nav--btn-wp">
+		<button class="btn btn--nav" on:click="{login}">Log In</button>
+	</div>
+	{/if}
 </header>
 
 <style>

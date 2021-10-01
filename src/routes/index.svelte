@@ -16,8 +16,9 @@ import { user } from '$lib/store';
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <div class="jumbotron">
-          <h2 class="display-4">Task Management made Easy!</h2>
-          <p class="lead">Instructions</p>
+          <h2 class="display-4">Du möchtest mit übersetzen und helfen alle Texte in Foundry verfügbar zu machen?</h2>
+          <p class="lead">Dann log dich ein.</p>
+          <p>Du hast fragen, dann schreib mir auf <a href="https://discord.com/">Discord</a>. Du erreichst mich unter crash#7509, du kannst mich auch auf <a href="https://twitter.com/crashoverried">Twitter</a> schreiben.</p>
       
           <button class="btn btn--login" on:click="{login}">Log In</button>
         </div>
