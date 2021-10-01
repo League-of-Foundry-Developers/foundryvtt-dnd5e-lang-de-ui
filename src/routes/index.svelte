@@ -2,7 +2,9 @@
 	export const prerender = true;
 </script>
 
-<script lang="ts"> 
+<script lang="ts">
+import { isAuthenticated, login } from '$lib/auth';
+ 
 	import Translater from '$lib/components/Translater.svelte'; 
 </script>
 <!-- <Translater file="dnd5e.tradegoods.json" dbFile="tradegoods.db"></Translater> -->
