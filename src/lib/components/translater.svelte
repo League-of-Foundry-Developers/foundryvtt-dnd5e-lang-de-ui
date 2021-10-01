@@ -1,11 +1,11 @@
 <script context="module" lang="ts">
 	export const prerender = true;
 </script>
-<script lang="ts">		
-
+<script lang="ts">
 import { onMount } from "svelte";
-import { login, logout, isAuthenticated, user } from "../auto";
+import { browser } from "$app/env";
 
+// import type {  } from  "tinymce";
 export let file;
 export let dbFile;
 
