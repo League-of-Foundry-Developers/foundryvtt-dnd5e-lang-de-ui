@@ -223,15 +223,6 @@ button:focus:not(:focus-visible) {
 	padding: 5px;
 }
 
-.btn--nav {
-	border-radius: 0;
-}
-
-.nav--btn-wp {
-	display: flex;
-	margin-left: 2px
-}
-
 input:disabled {
 	background-color: transparent;
 	border-color: transparent;
@@ -289,17 +280,86 @@ textarea {
     margin-top: 10px;
 }
 
-.user-menü-login {
-	width: 130px;
-	height: 50px;
-    display: flex;
+/* rework css */
+.nav {
+	display: flex;
+	background-color: var(--ranger-em);
+	height: 40px;
+	padding: 0 20px;
 }
 
-.user-menü-logout {
-	width: 64px;
-	height: 50px;
+.nav-burger-menu-wp {
+	width: 100%;
+}
+
+.nav-menu-wp {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.nav-menu-inner {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+}
+
+.nav-menu-inner.active {
+	background-color: var(--druid-moss);
+}
+
+.nav-menu-link {
+	text-decoration: none;
+}
+
+.nav-menu-link:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+.nav-menu-user-wp {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.user-menu-login {
+	display: flex;
+}
+
+.btn--nav {
+	border-radius: 0;
+	background-color: var(--wizard-cobalt);
+	height: 100%;
+	width: 70px;
+}
+
+.btn--nav:hover {
+	background-color: var(--monk-sky);
+}
+
+.btn--nav-logout {
+	width: 80px;
 }
 
 .user-image {
 	border-radius: 50%;
+	margin-right: 10px;
+}
+
+/* media queries */
+@media screen and (max-width: 1076px){
+	.nav-menu-wp {
+		display: none;
+	}
+	.nav-burger-menu-wp {
+		display: flex;
+	}
+
+
+}
+@media screen and (min-width: 1077px) {
+	.nav-burger-menu-wp {
+		display: none;
+	}
 }
