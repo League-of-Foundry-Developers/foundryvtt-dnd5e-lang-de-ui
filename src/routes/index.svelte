@@ -10,16 +10,21 @@ import { user } from '$lib/store';
 </script>
 <!-- <Translater file="dnd5e.tradegoods.json" dbFile="tradegoods.db"></Translater> -->
 <div>
-	<h1 class="w-100">Willkommen im Übersetzungstool für Foundry Virtual Tabletop - DnD5e Game System</h1>
+	<h1 class="w-100">Willkommen auf Translator.Gilneas.at</h1>
 	{#if !$isAuthenticated}
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <div class="jumbotron">
-          <h2 class="display-4">Du möchtest mit übersetzen und helfen alle Texte in Foundry verfügbar zu machen?</h2>
-          <p class="lead">Dann log dich ein.</p>
-          <p>Du hast fragen, dann schreib mir auf <a href="https://discord.com/">Discord</a>. Du erreichst mich unter crash#7509, du kannst mich auch auf <a href="https://twitter.com/crashoverried">Twitter</a> schreiben.</p>
-      
+          <p>Diese Seite wurde erstellt um das DnD5e System und sein Kompendium vom Englischen ins Deutsche zu übersetzen.</p>
+          <p>
+            Wir haben es uns zur Aufgabe gemacht, allen Spielern einen einfachen Zugang zu den DnD5e Regeln, Zaubern, Gegenständen, Völkern, Monstern und Charakteren zu ermöglichen.
+            Falls du uns unterstützen möchtest, registriere dich und hilf beim Übersetzen.
+          </p>
+          <p>
+            Sobald du eingeloggt bist, erhältst du weitere Informationen.
+            Du hast vorab Fragen? Dann scheib mir über <a href="https://discord.com/">Discord</a> unter <a href="https://twitter.com/crashoverried">crash#7509</a> oder auf Twitter.
+          </p>      
           <button class="btn btn--login" on:click="{login}">Log In</button>
         </div>
       </div>
