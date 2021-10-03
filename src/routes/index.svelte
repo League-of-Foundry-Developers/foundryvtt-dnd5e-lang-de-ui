@@ -6,7 +6,10 @@
 import { isAuthenticated, login } from '$lib/auth';
 import { user } from '$lib/store';
  
-	import Translater from '$lib/components/Translater.svelte'; 
+	import Translater from '$lib/components/Translater.svelte';
+import { log } from '$lib/logger';
+log.info('test log', user, new Date().toJSON());
+
 </script>
 <!-- <Translater file="dnd5e.tradegoods.json" dbFile="tradegoods.db"></Translater> -->
 <div>

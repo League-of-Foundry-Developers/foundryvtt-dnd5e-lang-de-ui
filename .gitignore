@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-/src/lib/auth_config.js
+src/lib/auth_config.js
 /.svelte-kit
 /build
 /functions
