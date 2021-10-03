@@ -321,7 +321,11 @@ textarea {
 	transition: all .2s ease-in-out;
 }
 
-.nav-burger-menu-inner .nav-burger-menu-list .nav-burger-menu-link:hover {
+.nav-burger-menu-link.active {
+	background-color: var(--druid-moss);
+}
+
+.nav-burger-menu-link:hover {
 	 transition: all .4s ease-in-out;
 }
 
