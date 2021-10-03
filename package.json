@@ -34,6 +34,7 @@
     "@seald-io/nedb": "^2.0.4",
     "cookie": "^0.4.1",
     "nedb": "^1.8.0",
+    "simple-node-logger": "^21.8.12",
     "util": "^0.12.4"
   }
 }
