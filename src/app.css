@@ -107,11 +107,6 @@ button:focus:not(:focus-visible) {
 	}
 }
 
-.main {
-	margin: 0 auto;
-	width: 1024px;
-}
-
 .w-100 {
 	width: 100%
 }
@@ -281,6 +276,13 @@ textarea {
 }
 
 /* rework css */
+/* ********** */
+
+/* main css */
+.main {
+	margin: 0 auto;
+	max-width: 1024px;
+}
 .nav {
 	display: flex;
 	background-color: var(--ranger-em);
@@ -288,10 +290,42 @@ textarea {
 	padding: 0 20px;
 }
 
+/* burger menu styling */
 .nav-burger-menu-wp {
 	width: 100%;
 }
 
+.nav-burger-menu-inner {
+	overflow: hidden;
+	transition: all .2s ease-in-out;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.nav-burger-menu-inner:hover {
+	 height: 300px;
+	 transition: all .4s ease-in-out;
+}
+
+.nav-burger-svg {
+	height: 40px;
+}
+
+.nav-burger-menu-list {
+	transition: all .2s ease-in-out;
+	background-color: var(--ranger-em);
+	padding: 15px;
+}
+
+.nav-burger-menu-link {
+	transition: all .2s ease-in-out;
+}
+
+.nav-burger-menu-inner .nav-burger-menu-list .nav-burger-menu-link:hover {
+	 transition: all .4s ease-in-out;
+}
+
+/* menu styling */
 .nav-menu-wp {
 	display: flex;
 	align-items: center;
@@ -327,6 +361,7 @@ textarea {
 	display: flex;
 }
 
+/* login button */
 .btn--nav {
 	border-radius: 0;
 	background-color: var(--wizard-cobalt);

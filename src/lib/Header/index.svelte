@@ -10,7 +10,28 @@ import { user } from '$lib/store';
 
 	<nav class="nav">
 		<div class="nav-burger-menu-wp">
-			<div class="">tt</div>
+			<div class="nav-burger-menu-inner">
+				<div class="nav-burger-svg">
+					<svg viewBox="0 0 100 80" width="30" height="40">
+						<rect y="10" width="100" height="15"></rect>
+						<rect y="35" width="100" height="15"></rect>
+						<rect y="60" width="100" height="15"></rect>
+					</svg>
+				</div>
+				<div class="nav-burger-menu-list">
+					<div class="nav-burger-menu-link" class:active={$page.path === '/'}><a class="nav-menu-link" sveltekit:prefetch href="/">Home</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/classes'}><a class="nav-menu-link" sveltekit:prefetch href="/classes">Classes</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/classfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/classfeatures">Class features</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/heroes'}><a class="nav-menu-link" sveltekit:prefetch href="/heroes">Heroes</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/items'}><a class="nav-menu-link" sveltekit:prefetch href="/items">Items</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/monsterfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/monsterfeatures">Monster features</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/monster'}><a class="nav-menu-link" sveltekit:prefetch href="/monster">Monster</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/races'}><a class="nav-menu-link" sveltekit:prefetch href="/races">Races</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/rules'}><a class="nav-menu-link" sveltekit:prefetch href="/rules">Rules</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/spells'}><a class="nav-menu-link" sveltekit:prefetch href="/spells">Spells</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/tradegoods'}><a class="nav-menu-link" sveltekit:prefetch href="/tradegoods">Tragegoods</a></div>
+				</div>
+			</div>
 		</div>
 		<div class="nav-menu-wp">
 			<div class="nav-menu-inner" class:active={$page.path === '/'}><a class="nav-menu-link" sveltekit:prefetch href="/">Home</a></div>
