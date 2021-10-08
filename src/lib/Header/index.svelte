@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-import { isAuthenticated, login, logout } from '$lib/auth';
-import { user } from '$lib/store';
-	import logo from './svelte-logo.svg';
+	import { isAuthenticated, login, logout } from '$lib/auth';
+	import { user } from '$lib/store';
 </script>
 
 <header>

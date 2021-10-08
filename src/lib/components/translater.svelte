@@ -138,7 +138,7 @@ onMount(async () => {
 	const response = await fetch('/api.json?file=' + file);
 	const json = await response.json();
 	filename = json.label
-
+	
 	const dbRespronce = await fetch('/api/db.json?file=' + dbFile);
 	dbjson = await dbRespronce.json();
 	

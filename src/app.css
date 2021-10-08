@@ -32,6 +32,12 @@
 	--background-without-opacity: rgba(255, 255, 255, 0.7);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
+
+	/* new color */
+
+	/* --backgroundColor: #8e9fae;
+	--head-color: #7b469b;
+	--active-color: #edf0f8; */
 }
 
 body {

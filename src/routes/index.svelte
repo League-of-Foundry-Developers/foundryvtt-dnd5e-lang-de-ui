@@ -6,9 +6,7 @@
 import { isAuthenticated, login } from '$lib/auth';
 import { user } from '$lib/store';
  
-	import Translater from '$lib/components/Translater.svelte';
-import { log } from '$lib/logger';
-log.info('test log', user, new Date().toJSON());
+import Translater from '$lib/components/Translater.svelte';
 
 </script>
 <!-- <Translater file="dnd5e.tradegoods.json" dbFile="tradegoods.db"></Translater> -->
@@ -26,7 +24,7 @@ log.info('test log', user, new Date().toJSON());
           </p>
           <p>
             Sobald du eingeloggt bist, erhältst du weitere Informationen.
-            Du hast vorab Fragen? Dann scheib mir über <a href="https://discord.com/">Discord</a> unter <a href="https://twitter.com/crashoverried">crash#7509</a> oder auf Twitter.
+            Du hast vorab Fragen? Dann scheib mir über <a href="https://discord.com/">Discord</a> unter crash#7509 oder auf <a href="https://twitter.com/crashoverried">Twitter</a>.
           </p>      
           <button class="btn btn--login" on:click="{login}">Log In</button>
         </div>

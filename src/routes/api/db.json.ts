@@ -6,6 +6,8 @@ import Datastore from 'nedb';
 
 // import * as path from 'path';
 import path from 'path';
+import { setFileLog } from '$lib/ts/log';
+
 const dirname = path.resolve('./');
 
 const projectRoot = path.join(dirname, dev ? 'static/packs' : 'srv/translator/build/assets/packs');
@@ -35,6 +37,7 @@ export const get: RequestHandler<Locals, string> = async (request) => {
     let body = '';
     const file = request.query.get('file');
     if (file) {
+        setFileLog(file);
         body = await readFile(file);
     }
     return {
