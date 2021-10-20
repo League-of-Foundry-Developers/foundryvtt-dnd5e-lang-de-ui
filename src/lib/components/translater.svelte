@@ -6,7 +6,7 @@ import { onMount } from "svelte";
 import { browser } from "$app/env";
 import { isAuthenticated } from "$lib/auth";
 import { user } from "$lib/store";
-import { setCookie } from "$lib/cookie";
+import { setCookie, translatorUser } from "$lib/cookie";
 
 // import type {  } from  "tinymce";
 export let file;
@@ -119,7 +119,6 @@ async function finallySafeToJson(entry, index, name) {
 	const result = await fetch(`/api.json`, {method:'POST', body: data});
 	
 	if (showSaveMessage) showSaveMessage = !showSaveMessage;
-
 	safeJson(index, name);	
 }
 
@@ -154,11 +153,8 @@ onMount(async () => {
 });
 
 if ($isAuthenticated) {
-  console.log('eingeloggt');
-  
   if ($user) {
-    console.log($user.email);
-    setCookie('Translatoruser', $user.email, 10);
+    setCookie(translatorUser, $user.email, 10);
   }
 }
 
