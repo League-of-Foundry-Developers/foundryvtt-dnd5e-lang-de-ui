@@ -7,6 +7,9 @@ import Datastore from 'nedb';
 // import * as path from 'path';
 import path from 'path';
 import { setFileLog } from '$lib/ts/log';
+import { readCookie, translatorUser } from '$lib/cookie';
+
+
 
 const dirname = path.resolve('./');
 
@@ -36,8 +39,9 @@ const readFile:Promise<string> = (filePath:string) => {
 export const get: RequestHandler<Locals, string> = async (request) => {
     let body = '';
     const file = request.query.get('file');
+
     if (file) {
-        setFileLog(file);
+        setFileLog(file, readCookie(request)[translatorUser]);
         body = await readFile(file);
     }
     return {
