@@ -179,7 +179,7 @@ button:focus:not(:focus-visible) {
 /* btn styling */
 .btn {
 	border-radius: 5px;
-	border-color: transparent;
+	border-color: #000;
 	background-color: var(--monk-sky);
 	color: rgba(255, 255, 255, 0.829);
 	cursor: pointer;

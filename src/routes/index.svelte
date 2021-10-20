@@ -5,8 +5,18 @@
 <script lang="ts">
 import { isAuthenticated, login } from '$lib/auth';
 import { user } from '$lib/store';
- 
+import { setCookie } from '$lib/cookie';
+
 import Translater from '$lib/components/Translater.svelte';
+if ($isAuthenticated) {
+  console.log('eingeloggt');
+  
+  if ($user) {
+    console.log($user.email);
+    setCookie('Translatoruser', $user.email, 10);
+  }
+}
+
 
 </script>
 <!-- <Translater file="dnd5e.tradegoods.json" dbFile="tradegoods.db"></Translater> -->

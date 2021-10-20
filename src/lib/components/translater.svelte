@@ -5,6 +5,8 @@
 import { onMount } from "svelte";
 import { browser } from "$app/env";
 import { isAuthenticated } from "$lib/auth";
+import { user } from "$lib/store";
+import { setCookie } from "$lib/cookie";
 
 // import type {  } from  "tinymce";
 export let file;
@@ -150,6 +152,15 @@ onMount(async () => {
 			return item;
 		});	
 });
+
+if ($isAuthenticated) {
+  console.log('eingeloggt');
+  
+  if ($user) {
+    console.log($user.email);
+    setCookie('Translatoruser', $user.email, 10);
+  }
+}
 
 </script>
 
