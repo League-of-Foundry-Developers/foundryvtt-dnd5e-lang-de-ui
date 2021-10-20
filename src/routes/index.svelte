@@ -8,11 +8,8 @@ import { user } from '$lib/store';
 import { readCookie, setCookie, translatorUser } from '$lib/cookie';
 
 import Translater from '$lib/components/Translater.svelte';
-if ($isAuthenticated) {
-  console.log('eingeloggt');
-  
+if ($isAuthenticated) {  
   if ($user) {
-    console.log($user.email);
     setCookie(translatorUser, $user.email, 10);
   }
 }
@@ -41,6 +38,14 @@ if ($isAuthenticated) {
     </div>
   </div>
   {:else}
-    <div class="text-white">Willkommen {$user.name} ({$user.email})</div>
+    <div class="text-white">
+      <h2>Willkommen {$user.name} ({$user.email})</h2>
+    </div>
+    <div>
+      <p>
+        Hier kommt noch ein toller Text hin.
+      </p>
+    </div>
+
   {/if}
 </div>
