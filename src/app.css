@@ -32,13 +32,15 @@
 	--background-without-opacity: rgba(255, 255, 255, 0.7);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
+
+	/* new color */
+
+	--site-color: #8e9fae;
+	--nav-color: #7b469b;
+	--active-color: #edf0f8;
 }
 
-body {
-	min-height: 100vh;
-	margin: 0;
-	background-color: var(--primary-color);
-}
+
 
 body::before {
 	content: '';
@@ -121,14 +123,7 @@ button:focus:not(:focus-visible) {
 .wrapper {
 	display: flex;
 }
-.container {
-	border: 1px solid #000;
-	border-radius: 35px;
-	padding: 10px 15px 20px;
-	margin-bottom: 10px;
-	box-shadow: 0 0 2px 1px #000;
-	background-color: var(--paper-color);
-}
+
 .en-translation {
 	flex: 50%;
 }
@@ -184,7 +179,7 @@ button:focus:not(:focus-visible) {
 /* btn styling */
 .btn {
 	border-radius: 5px;
-	border-color: transparent;
+	border-color: #000;
 	background-color: var(--monk-sky);
 	color: rgba(255, 255, 255, 0.829);
 	cursor: pointer;
@@ -278,6 +273,13 @@ textarea {
 /* rework css */
 /* ********** */
 
+/* body */
+body {
+	min-height: 100vh;
+	margin: 0;
+	background-color: var(--site-color);
+}
+
 /* main css */
 .main {
 	margin: 0 auto;
@@ -285,9 +287,10 @@ textarea {
 }
 .nav {
 	display: flex;
-	background-color: var(--ranger-em);
+	background-color: var(--nav-color);
 	height: 40px;
 	padding: 0 20px;
+	color: var(--active-color);
 }
 
 /* burger menu styling */
@@ -313,7 +316,7 @@ textarea {
 
 .nav-burger-menu-list {
 	transition: all .2s ease-in-out;
-	background-color: var(--ranger-em);
+	background-color: var(--nav-color);
 	padding: 15px;
 }
 
@@ -322,7 +325,8 @@ textarea {
 }
 
 .nav-burger-menu-link.active {
-	background-color: var(--druid-moss);
+	background-color: var(--active-color);
+	color: #000;
 }
 
 .nav-burger-menu-link:hover {
@@ -344,16 +348,25 @@ textarea {
 }
 
 .nav-menu-inner.active {
-	background-color: var(--druid-moss);
+	background-color: var(--active-color);
+}
+
+.nav-menu-inner.active .nav-menu-link {
+	color: #000;
+}
+
+.nav-menu-inner.active .nav-menu-link:hover {
+	color: var(--nav-color);
 }
 
 .nav-menu-link {
 	text-decoration: none;
+	color: var(--active-color);
 }
 
 .nav-menu-link:hover {
 	text-decoration: none;
-	color: #fff;
+	color: #000;
 }
 
 .nav-menu-user-wp {
@@ -368,7 +381,8 @@ textarea {
 /* login button */
 .btn--nav {
 	border-radius: 0;
-	background-color: var(--wizard-cobalt);
+	background-color: var(--active-color);
+	color: #000;
 	height: 100%;
 	width: 70px;
 }
@@ -401,4 +415,14 @@ textarea {
 	.nav-burger-menu-wp {
 		display: none;
 	}
+}
+
+/* container */
+.container {
+	border: 1px solid #000;
+	border-radius: 5px;
+	padding: 10px 15px 20px;
+	margin-bottom: 10px;
+	box-shadow: 0 0 2px 1px #000;
+	background-color: var(--active-color);
 }
