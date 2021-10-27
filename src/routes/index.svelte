@@ -8,6 +8,7 @@ import { user } from '$lib/store';
 import { readCookie, setCookie, translatorUser } from '$lib/cookie';
 
 import Translater from '$lib/components/Translater.svelte';
+import { src_url_equal } from 'svelte/internal';
 if ($isAuthenticated) {  
   if ($user) {
     setCookie(translatorUser, $user.email, 10);
@@ -43,7 +44,20 @@ if ($isAuthenticated) {
     </div>
     <div>
       <p>
-        Hier kommt noch ein toller Text hin.
+        Großartig das du uns bei der übersetzung von DnD unterstützen möchtest. 
+        Die Seite befindet sich Aktuell in einer Beta, daher kann es zu kleinen Problemen kommen.
+        Du hast einen fehler entdeckt oder hast einen vorschlag für verbesserung, dann schreib bitte ein Issu auf:
+        <a href="https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui/issues">github</a>
+      </p>
+      <p>
+        Das System ist ganz einfach aufgebaut. Auf der Linken Seite findet man das Englische Original, auf der Rechten Seite den Bereich um den Text zu Übersetzen.
+        <img src="src/img/Eng-Deu.jpg" alt="example for page view" >
+      </p>
+      <p>
+        Einfach auf Edit gehen und man kann anfangen zu übersetzen.
+      </p>
+      <p>
+        Wir dürfen die Texte aus dem Buch verwenden, es muss aber immer die Seite Angegeben werden. Somit Zittieren wir die Texte.
       </p>
     </div>
 
