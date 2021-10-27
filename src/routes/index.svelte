@@ -44,20 +44,21 @@ if ($isAuthenticated) {
     </div>
     <div>
       <p>
-        Großartig das du uns bei der übersetzung von DnD unterstützen möchtest. 
-        Die Seite befindet sich Aktuell in einer Beta, daher kann es zu kleinen Problemen kommen.
-        Du hast einen fehler entdeckt oder hast einen vorschlag für verbesserung, dann schreib bitte ein Issu auf:
+        Krümelchen, [27.10.21 22:04]
+  Großartig, dass du uns bei der Übersetzung von DnD unterstützen möchtest. 
+        Die Seite befindet sich aktuell in einer Beta, daher kann es zu kleinen Problemen kommen.
+        Du hast einen Fehler entdeckt oder einen Vorschlag für Verbesserung? Dann erstelle bitte ein Issue:
         <a href="https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui/issues">github</a>
       </p>
       <p>
-        Das System ist ganz einfach aufgebaut. Auf der Linken Seite findet man das Englische Original, auf der Rechten Seite den Bereich um den Text zu Übersetzen.
+        Die Seite ist ganz einfach aufgebaut. Auf der linken Seite findest du das englische Original, auf der rechten Seite den Bereich für die Übersetzung.
         <img src="src/img/Eng-Deu.jpg" alt="example for page view" >
       </p>
       <p>
         Einfach auf Edit gehen und man kann anfangen zu übersetzen.
       </p>
       <p>
-        Wir dürfen die Texte aus dem Buch verwenden, es muss aber immer die Seite Angegeben werden. Somit Zittieren wir die Texte.
+        Wir haben die Erlaubnis, die Texte aus dem Buch zu verwenden, wodurch es ein Zitat wird. Es muss aber immer die Buchseite angegeben werden.
       </p>
     </div>
 
