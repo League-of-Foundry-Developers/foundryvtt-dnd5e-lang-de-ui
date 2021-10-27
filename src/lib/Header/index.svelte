@@ -1,137 +1,63 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import logo from './svelte-logo.svg';
+	import { isAuthenticated, login, logout } from '$lib/auth';
+	import { user } from '$lib/store';
 </script>
 
 <header>
 	
 
-	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
-		<ul>
-			<li class:active={$page.path === '/'}><a sveltekit:prefetch href="/">Home</a></li>
-			<li class:active={$page.path === '/classes'}><a sveltekit:prefetch href="/classes">Classes</a></li>
-			<li class:active={$page.path === '/classfeatures'}><a sveltekit:prefetch href="/classfeatures">Class features</a></li>
-			<li class:active={$page.path === '/heroes'}><a sveltekit:prefetch href="/heroes">Heroes</a></li>
-			<li class:active={$page.path === '/items'}><a sveltekit:prefetch href="/items">Items</a></li>
-			<li class:active={$page.path === '/monsterfeatures'}><a sveltekit:prefetch href="/monsterfeatures">Monster features</a></li>
-			<li class:active={$page.path === '/monster'}><a sveltekit:prefetch href="/monster">Monster</a></li>
-			<li class:active={$page.path === '/races'}><a sveltekit:prefetch href="/races">Races</a></li>
-			<li class:active={$page.path === '/rules'}><a sveltekit:prefetch href="/rules">Rules</a></li>
-			<li class:active={$page.path === '/spells'}><a sveltekit:prefetch href="/spells">Spells</a></li>
-			<li class:active={$page.path === '/tradegoods'}><a sveltekit:prefetch href="/tradegoods">Tragegoods</a></li>
-		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
+	<nav class="nav">
+		<div class="nav-burger-menu-wp">
+			<div class="nav-burger-menu-inner">
+				<div class="nav-burger-svg">
+					<svg viewBox="0 0 100 80" width="30" height="40">
+						<rect y="10" width="100" height="15"></rect>
+						<rect y="35" width="100" height="15"></rect>
+						<rect y="60" width="100" height="15"></rect>
+					</svg>
+				</div>
+				<div class="nav-burger-menu-list">
+					<div class="nav-burger-menu-link" class:active={$page.path === '/'}><a class="nav-menu-link" sveltekit:prefetch href="/">Home</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/classes'}><a class="nav-menu-link" sveltekit:prefetch href="/classes">Classes</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/classfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/classfeatures">Class features</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/heroes'}><a class="nav-menu-link" sveltekit:prefetch href="/heroes">Heroes</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/items'}><a class="nav-menu-link" sveltekit:prefetch href="/items">Items</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/monsterfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/monsterfeatures">Monster features</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/monster'}><a class="nav-menu-link" sveltekit:prefetch href="/monster">Monster</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/races'}><a class="nav-menu-link" sveltekit:prefetch href="/races">Races</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/rules'}><a class="nav-menu-link" sveltekit:prefetch href="/rules">Rules</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/spells'}><a class="nav-menu-link" sveltekit:prefetch href="/spells">Spells</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/tradegoods'}><a class="nav-menu-link" sveltekit:prefetch href="/tradegoods">Tragegoods</a></div>
+				</div>
+			</div>
+		</div>
+		<div class="nav-menu-wp">
+			<div class="nav-menu-inner" class:active={$page.path === '/'}><a class="nav-menu-link" sveltekit:prefetch href="/">Home</a></div>
+			{#if $isAuthenticated}
+			<div class="nav-menu-inner" class:active={$page.path === '/classes'}><a class="nav-menu-link" sveltekit:prefetch href="/classes">Classes</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/classfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/classfeatures">Class features</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/heroes'}><a class="nav-menu-link" sveltekit:prefetch href="/heroes">Heroes</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/items'}><a class="nav-menu-link" sveltekit:prefetch href="/items">Items</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/monsterfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/monsterfeatures">Monster features</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/monster'}><a class="nav-menu-link" sveltekit:prefetch href="/monster">Monster</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/races'}><a class="nav-menu-link" sveltekit:prefetch href="/races">Races</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/rules'}><a class="nav-menu-link" sveltekit:prefetch href="/rules">Rules</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/spells'}><a class="nav-menu-link" sveltekit:prefetch href="/spells">Spells</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/tradegoods'}><a class="nav-menu-link" sveltekit:prefetch href="/tradegoods">Tragegoods</a></div>
+			{/if}
+		</div>
+		<div class="nav-menu-user-wp">
+			{#if $isAuthenticated}
+			<div class="user-menu-login">
+				<img class="user-image" alt="user picture" src={$user.picture}>
+				<button class="btn btn--nav btn--nav-logout" on:click="{logout}">Log Out</button>
+			</div>
+			{:else}
+			<div class="user-menu-logout">
+				<button class="btn btn--nav" on:click="{login}">Log In</button>
+			</div>
+			{/if}
+		</div>
 	</nav>
-
-	<div class="corner">
-		<!-- TODO put something else here? github link? -->
-	</div>
 </header>
-
-<style>
-	header {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-		margin: 0 auto;
-	}
-
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
-	}
-
-	path {
-		fill: var(--background);
-	}
-
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li.active {
-		background-color: var(--barbarian);
-	}
-
-	li.active::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--accent-color);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 1em;
-		color: var(--heading-color);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 10%;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	li.active a {
-		color: #fff;
-	}
-
-	li.active a:hover {
-		color: #000;
-	}
-
-	a:hover {
-		color: var(--accent-color);
-	}
-</style>

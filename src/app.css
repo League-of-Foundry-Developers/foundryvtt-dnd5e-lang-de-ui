@@ -32,13 +32,15 @@
 	--background-without-opacity: rgba(255, 255, 255, 0.7);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
+
+	/* new color */
+
+	--site-color: #8e9fae;
+	--nav-color: #7b469b;
+	--active-color: #edf0f8;
 }
 
-body {
-	min-height: 100vh;
-	margin: 0;
-	background-color: var(--primary-color);
-}
+
 
 body::before {
 	content: '';
@@ -107,11 +109,6 @@ button:focus:not(:focus-visible) {
 	}
 }
 
-.main {
-	margin: 0 auto;
-	width: 1024px;
-}
-
 .w-100 {
 	width: 100%
 }
@@ -126,14 +123,7 @@ button:focus:not(:focus-visible) {
 .wrapper {
 	display: flex;
 }
-.container {
-	border: 1px solid #000;
-	border-radius: 35px;
-	padding: 10px 15px 20px;
-	margin-bottom: 10px;
-	box-shadow: 0 0 2px 1px #000;
-	background-color: var(--paper-color);
-}
+
 .en-translation {
 	flex: 50%;
 }
@@ -189,7 +179,7 @@ button:focus:not(:focus-visible) {
 /* btn styling */
 .btn {
 	border-radius: 5px;
-	border-color: transparent;
+	border-color: #000;
 	background-color: var(--monk-sky);
 	color: rgba(255, 255, 255, 0.829);
 	cursor: pointer;
@@ -217,6 +207,10 @@ button:focus:not(:focus-visible) {
 
 .btn--color-cancel:hover {
 	background-color: var(--accent-color);
+}
+
+.btn--login {
+	padding: 5px;
 }
 
 input:disabled {
@@ -276,3 +270,159 @@ textarea {
     margin-top: 10px;
 }
 
+/* rework css */
+/* ********** */
+
+/* body */
+body {
+	min-height: 100vh;
+	margin: 0;
+	background-color: var(--site-color);
+}
+
+/* main css */
+.main {
+	margin: 0 auto;
+	max-width: 1024px;
+}
+.nav {
+	display: flex;
+	background-color: var(--nav-color);
+	height: 40px;
+	padding: 0 20px;
+	color: var(--active-color);
+}
+
+/* burger menu styling */
+.nav-burger-menu-wp {
+	width: 100%;
+}
+
+.nav-burger-menu-inner {
+	overflow: hidden;
+	transition: all .2s ease-in-out;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.nav-burger-menu-inner:hover {
+	 height: 300px;
+	 transition: all .4s ease-in-out;
+}
+
+.nav-burger-svg {
+	height: 40px;
+}
+
+.nav-burger-menu-list {
+	transition: all .2s ease-in-out;
+	background-color: var(--nav-color);
+	padding: 15px;
+}
+
+.nav-burger-menu-link {
+	transition: all .2s ease-in-out;
+}
+
+.nav-burger-menu-link.active {
+	background-color: var(--active-color);
+	color: #000;
+}
+
+.nav-burger-menu-link:hover {
+	 transition: all .4s ease-in-out;
+}
+
+/* menu styling */
+.nav-menu-wp {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.nav-menu-inner {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+}
+
+.nav-menu-inner.active {
+	background-color: var(--active-color);
+}
+
+.nav-menu-inner.active .nav-menu-link {
+	color: #000;
+}
+
+.nav-menu-inner.active .nav-menu-link:hover {
+	color: var(--nav-color);
+}
+
+.nav-menu-link {
+	text-decoration: none;
+	color: var(--active-color);
+}
+
+.nav-menu-link:hover {
+	text-decoration: none;
+	color: #000;
+}
+
+.nav-menu-user-wp {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.user-menu-login {
+	display: flex;
+}
+
+/* login button */
+.btn--nav {
+	border-radius: 0;
+	background-color: var(--active-color);
+	color: #000;
+	height: 100%;
+	width: 70px;
+}
+
+.btn--nav:hover {
+	background-color: var(--monk-sky);
+}
+
+.btn--nav-logout {
+	width: 80px;
+}
+
+.user-image {
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+/* media queries */
+@media screen and (max-width: 1076px){
+	.nav-menu-wp {
+		display: none;
+	}
+	.nav-burger-menu-wp {
+		display: flex;
+	}
+
+
+}
+@media screen and (min-width: 1077px) {
+	.nav-burger-menu-wp {
+		display: none;
+	}
+}
+
+/* container */
+.container {
+	border: 1px solid #000;
+	border-radius: 5px;
+	padding: 10px 15px 20px;
+	margin-bottom: 10px;
+	box-shadow: 0 0 2px 1px #000;
+	background-color: var(--active-color);
+}
