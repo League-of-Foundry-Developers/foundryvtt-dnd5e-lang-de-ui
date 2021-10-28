@@ -52,7 +52,7 @@ if ($isAuthenticated) {
       </p>
       <p>
         Die Seite ist ganz einfach aufgebaut. Auf der linken Seite findest du das englische Original, auf der rechten Seite den Bereich für die Übersetzung.
-        <img src="src/img/Eng-Deu.jpg" alt="example for page view" >
+        <img src="/img/Eng-Deu.jpg" alt="example for page view" >
       </p>
       <p>
         Einfach auf Edit gehen und man kann anfangen zu übersetzen.
