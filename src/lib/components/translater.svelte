@@ -253,6 +253,8 @@ if ($isAuthenticated) {
 										<button on:click={() => handelClick(i, 'name')} class="btn">
 											{shown.name[i] ?'safe' : 'Edit'}
 										</button>
+										{:else}
+											<button disabled>Edit</button>
 										{/if}
 								</div>
 							</div>
@@ -263,6 +265,8 @@ if ($isAuthenticated) {
 									<button on:click={() => handelClick(i, 'description')} class="btn" id="{file + '.description.' + [i]}">
 										{shown.description[i] ? 'safe' : 'Edit'}
 									</button>
+									{:else}
+										<button disabled>Edit</button>
 									{/if}
 							</div>
 							{#if filename === 'Zauber (SRD)'}
@@ -273,6 +277,8 @@ if ($isAuthenticated) {
 									<button on:click={() => handelClick(i, 'material')} class="btn" id="{file + '.material.' + [i]}">
 										{shown.material[i] ? 'safe' : 'Edit'}
 									</button>
+									{:else}
+									<button disabled>Edit</button>
 									{/if}
 								</div>
 							{/if}
@@ -283,6 +289,8 @@ if ($isAuthenticated) {
 								<button on:click={() => handelClick(i, 'source')} class="btn">
 									{shown.source[i] ?'safe' : 'Edit'}
 								</button>
+								{:else}
+									<button disabled>Edit</button>
 								{/if}				
 							</div>
 						</div>
