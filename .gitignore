@@ -1,5 +1,11 @@
 .DS_Store
 node_modules
+src/lib/auth_config.js
 /.svelte-kit
 /build
 /functions
+src/lib/log/changefrom.log
+
+src/lib/auth_config.ts
+
+src/lib/log/safefrom.log
