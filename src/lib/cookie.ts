@@ -12,10 +12,10 @@ export function setCookie(cname, cvalue, exdays) {
   }
 
 export function readCookie(request) {
-  const cookies = {};
-  request.headers.cookie.split(';').forEach(function(cookie) {
-  const parts = cookie.match(/(.*?)=(.*)$/)
-  cookies[ parts[1].trim() ] = (parts[2] || '').trim();
-  });
-  return cookies;
+    const cookies = {};
+    request.headers.cookie.split(';').forEach(function(cookie) {
+    const parts = cookie.match(/(.*?)=(.*)$/)
+    cookies[ parts[1].trim() ] = (parts[2] || '').trim();
+    });
+    return cookies;
 }

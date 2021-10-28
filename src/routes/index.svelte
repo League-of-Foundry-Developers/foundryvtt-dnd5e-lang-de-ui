@@ -5,7 +5,7 @@
 <script lang="ts">
 import { isAuthenticated, login } from '$lib/auth';
 import { user } from '$lib/store';
-import { readCookie, setCookie, translatorUser } from '$lib/cookie';
+import { setCookie, translatorUser } from '$lib/cookie';
 
 import Translater from '$lib/components/Translater.svelte';
 import { src_url_equal } from 'svelte/internal';
@@ -44,8 +44,7 @@ if ($isAuthenticated) {
     </div>
     <div>
       <p>
-        Krümelchen, [27.10.21 22:04]
-  Großartig, dass du uns bei der Übersetzung von DnD unterstützen möchtest. 
+        Großartig, dass du uns bei der Übersetzung von DnD unterstützen möchtest. 
         Die Seite befindet sich aktuell in einer Beta, daher kann es zu kleinen Problemen kommen.
         Du hast einen Fehler entdeckt oder einen Vorschlag für Verbesserung? Dann erstelle bitte ein Issue:
         <a href="https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui/issues">github</a>
