@@ -41,7 +41,6 @@ export const get: RequestHandler<Locals, string> = async (request) => {
     const file = request.query.get('file');
 
     if (file) {
-        setFileLog(file, readCookie(request)[translatorUser]);
         body = await readFile(file);
     }
     return {
