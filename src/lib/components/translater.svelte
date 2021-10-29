@@ -71,9 +71,22 @@ function dontSafe(entry, index, name) {
 	safeJson(index, name);
 }
 
+function dontShowSafe(entry, index, name) {
+	// ToDo: Include copy to clipboard
+
+	showSaveMessage = !showSaveMessage;
+	safeJson(index, name);
+}
+
+
+
 // when user cancel the change
 function cancelIt() {
 	showMessage = !showMessage;
+}
+
+function cancelShowIt() {
+	showSaveMessage = !showSaveMessage;
 }
 
 async function safeAtJson(entry, index, name) {
@@ -187,8 +200,8 @@ if ($isAuthenticated) {
 					Es ist schon Text vorhanden, wollen Sie diesen ändern?
 					<div class="dialog-btn-wp">
 						<button on:click={() => finallySafeToJson(safeEntry, safeIndex, safeName)} class="btn btn--spacing">ja</button>
-						<button on:click={() => dontSafe(safeEntry, safeIndex, safeName)} class="btn btn--spacing btn--color-switch">nein</button>
-						<button on:click={() => cancelIt()} class="btn btn--spacing btn--color-cancel">Abbrechen</button>
+						<button on:click={() => dontShowSafe(safeEntry, safeIndex, safeName)} class="btn btn--spacing btn--color-switch">nein</button>
+						<button on:click={() => cancelShowIt()} class="btn btn--spacing btn--color-cancel">Abbrechen</button>
 					</div>
 				</div>
 			</div>
