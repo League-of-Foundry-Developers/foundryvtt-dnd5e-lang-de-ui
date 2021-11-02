@@ -306,7 +306,7 @@ body {
 }
 
 .nav-burger-menu-inner:hover {
-	 height: 300px;
+	 height: 410px;
 	 transition: all .4s ease-in-out;
 }
 
@@ -322,6 +322,7 @@ body {
 
 .nav-burger-menu-link {
 	transition: all .2s ease-in-out;
+	padding: 6px 0;
 }
 
 .nav-burger-menu-link.active {
@@ -408,7 +409,9 @@ body {
 	.nav-burger-menu-wp {
 		display: flex;
 	}
-
+	.nav-burger-menu-link.active .nav-menu-link {
+		color:#000;
+	}
 
 }
 @media screen and (min-width: 1077px) {
@@ -425,4 +428,12 @@ body {
 	margin-bottom: 10px;
 	box-shadow: 0 0 2px 1px #000;
 	background-color: var(--active-color);
+}
+
+/* body styling */
+@media screen and (max-width: 1024px) {
+	.de-translation {
+		border-bottom: 1px dotted;
+		margin-bottom: 30px;
+	}
 }
