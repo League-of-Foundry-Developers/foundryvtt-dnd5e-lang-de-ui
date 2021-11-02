@@ -285,6 +285,7 @@ body {
 	margin: 0 auto;
 	max-width: 1024px;
 }
+
 .nav {
 	display: flex;
 	background-color: var(--nav-color);
@@ -435,5 +436,31 @@ body {
 	.de-translation {
 		border-bottom: 1px dotted;
 		margin-bottom: 30px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.en-translation {
+		max-width: 50%;
+	}
+}
+
+/* footer */
+footer {
+	border-top: 1px solid;
+	padding-top: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+footer a {
+	font-weight: bold;
+}
+
+@media (min-width: 480px) {
+	footer {
+		padding: 0;
 	}
 }
