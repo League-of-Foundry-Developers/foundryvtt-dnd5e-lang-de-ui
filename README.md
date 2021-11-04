@@ -1,5 +1,10 @@
 
 # foundryvtt-dnd5e-lang-de-ui
+![FoundryVTT German [D&D5E] Module Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FLeague-of-Foundry-Developers%2Fleague-repo-status%2Fshields-endpoint%2Ffoundryvtt-dnd5e-lang-de-ui.json)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui?label=Latest+Release)
+![GitHub Downloads All Releases](https://img.shields.io/github/downloads/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui/total?label=Downloads+(Total))
+![GitHub Downloads Release](https://img.shields.io/github/downloads/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui/latest/total?label=Downloads+(Latest))
+![GitHub Release Date](https://img.shields.io/github/release-date/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui?label=Release+Date)
 
 Web translation UI for https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de
 
