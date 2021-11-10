@@ -445,6 +445,14 @@ body {
 	}
 }
 
+/* loading spinner */
+.loading-spinner {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 /* footer */
 footer {
 	border-top: 1px solid;

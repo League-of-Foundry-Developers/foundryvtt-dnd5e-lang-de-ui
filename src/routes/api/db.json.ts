@@ -8,7 +8,7 @@ import Datastore from 'nedb';
 import path from 'path';
 import { setFileLog } from '$lib/ts/log';
 import { readCookie, translatorUser } from '$lib/cookie';
-
+import { visibleSpinner } from '$lib/store';
 
 
 const dirname = path.resolve('./');
@@ -27,6 +27,7 @@ const readFile:Promise<string> = (filePath:string) => {
                 return reject(JSON.stringify(error, null, 2));
             }
             console.log('INFO: local database loaded successfully.');
+            visibleSpinner.decrement;
             db.find({}, function(err, docs) {
                 if(err) return reject(err);
                     return resolve(JSON.stringify(docs))
