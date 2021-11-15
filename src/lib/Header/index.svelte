@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page, navigating } from '$app/stores';
 	import { isAuthenticated, login, logout } from '$lib/auth';
 	import { user, visibleSpinner } from '$lib/store';
+
 </script>
 
 <header>
-	
-
 	<nav class="nav">
 		<div class="nav-burger-menu-wp">
 			<div class="nav-burger-menu-inner">
@@ -19,7 +18,7 @@
 				</div>
 				<div class="nav-burger-menu-list">
 					<div class="nav-burger-menu-link" class:active={$page.path === '/'}><a class="nav-menu-link" sveltekit:prefetch href="/">Home</a></div>
-					<div class="nav-burger-menu-link" on:click={visibleSpinner.increment} class:active={$page.path === '/items'}><a class="nav-menu-link" sveltekit:prefetch href="/items">Gegenstände</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/items'}><a class="nav-menu-link" sveltekit:prefetch href="/items">Gegenstände</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/tradegoods'}><a class="nav-menu-link" sveltekit:prefetch href="/tradegoods">Handelsgüter</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/heroes'}><a class="nav-menu-link" sveltekit:prefetch href="/heroes">Helden</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/classes'}><a class="nav-menu-link" sveltekit:prefetch href="/classes">Klassen</a></div>

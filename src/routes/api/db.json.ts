@@ -21,13 +21,12 @@ const readFile:Promise<string> = (filePath:string) => {
     
     return new Promise((resolve, reject) => {
         const db = new Datastore({ filename: fullPath(filePath), autoload: true });
-        db.loadDatabase(function (error) {   
+        db.loadDatabase(function (error) {
             if (error) {
                 console.log('FATAL: local database could not be loaded. Caused by: ' + error);
                 return reject(JSON.stringify(error, null, 2));
             }
             console.log('INFO: local database loaded successfully.');
-            visibleSpinner.decrement;
             db.find({}, function(err, docs) {
                 if(err) return reject(err);
                     return resolve(JSON.stringify(docs))
