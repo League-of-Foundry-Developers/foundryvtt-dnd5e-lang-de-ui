@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Header from '$lib/Header/index.svelte';
 	import '../app.css';
 </script>
@@ -10,6 +11,10 @@
 </main>
 
 <footer>
+	<div class="">
+		<a href="/impressum">Impressum</a>
+		<a href="/datenschutz">Datenschutz</a>
+	</div>
 	<p>Ein FoundryVtt Community Projekt. Mehr Infos unter <a href="https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui">Github</a></p>
 </footer>
 
@@ -25,21 +30,4 @@
 		box-sizing: border-box;
 	}
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	}
 </style>

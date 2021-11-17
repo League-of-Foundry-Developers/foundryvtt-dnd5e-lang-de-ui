@@ -8,7 +8,7 @@ import Datastore from 'nedb';
 import path from 'path';
 import { setFileLog } from '$lib/ts/log';
 import { readCookie, translatorUser } from '$lib/cookie';
-
+import { visibleSpinner } from '$lib/store';
 
 
 const dirname = path.resolve('./');
@@ -21,7 +21,7 @@ const readFile:Promise<string> = (filePath:string) => {
     
     return new Promise((resolve, reject) => {
         const db = new Datastore({ filename: fullPath(filePath), autoload: true });
-        db.loadDatabase(function (error) {   
+        db.loadDatabase(function (error) {
             if (error) {
                 console.log('FATAL: local database could not be loaded. Caused by: ' + error);
                 return reject(JSON.stringify(error, null, 2));
