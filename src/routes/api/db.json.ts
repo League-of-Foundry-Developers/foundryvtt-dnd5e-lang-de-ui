@@ -6,10 +6,8 @@ import Datastore from 'nedb';
 
 // import * as path from 'path';
 import path from 'path';
-import { setFileLog } from '$lib/ts/log';
 import { readCookie, translatorUser } from '$lib/cookie';
-import { visibleSpinner } from '$lib/store';
-
+import { logger } from '$lib/logger';
 
 const dirname = path.resolve('./');
 
@@ -23,14 +21,17 @@ const readFile:Promise<string> = (filePath:string) => {
         const db = new Datastore({ filename: fullPath(filePath), autoload: true });
         db.loadDatabase(function (error) {
             if (error) {
+                logger.fatal('FATAL: local database could not be loaded. Caused by: ' + error);
                 console.log('FATAL: local database could not be loaded. Caused by: ' + error);
                 return reject(JSON.stringify(error, null, 2));
             }
+
+            logger.info('INFO: local database loaded successfully.');
             console.log('INFO: local database loaded successfully.');
             db.find({}, function(err, docs) {
                 if(err) return reject(err);
-                    return resolve(JSON.stringify(docs))
-                });
+                return resolve(JSON.stringify(docs))
+            });
             
         });
     })
@@ -39,8 +40,9 @@ const readFile:Promise<string> = (filePath:string) => {
 export const get: RequestHandler<Locals, string> = async (request) => {
     let body = '';
     const file = request.query.get('file');
-
+    
     if (file) {
+        logger.info('user', readCookie(request)[translatorUser], 'open file', file);
         body = await readFile(file);
     }
     return {
