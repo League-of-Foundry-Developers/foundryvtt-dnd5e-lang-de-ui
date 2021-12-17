@@ -16,6 +16,7 @@
 		<a href="/datenschutz">Datenschutz</a>
 	</div>
 	<p>Ein FoundryVtt Community Projekt. Mehr Infos unter <a href="https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui">Github</a></p>
+	<p>Version 0.8</p>
 </footer>
 
 <style>
