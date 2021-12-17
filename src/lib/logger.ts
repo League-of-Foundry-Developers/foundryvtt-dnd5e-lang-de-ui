@@ -1,9 +1,28 @@
-import * as SimpleNodeLogger from 'simple-node-logger';
-const create = SimpleNodeLogger?.createSimpleLogger;
+import { ILogObject, Logger } from "tslog";
+import { appendFileSync } from "fs";
 
-// create a custom timestamp format for log statements
-const opts = {
-    logFilePath:'./src/lib/log/changefrom.log',
-    timestampFormat:'YYYY-MM-DD HH:mm:ss'
+function logToTransport(logObject: ILogObject) {
+    appendFileSync("./src/lib/log/loadfile.txt", JSON.stringify(logObject) + "\n");
 }
-export const log = typeof create === 'function' ? create( opts ): null;
+
+function logToError(logObject: ILogObject) {
+    appendFileSync("./src/lib/log/loadingFile.txt", JSON.stringify(logObject) + "\n");
+}
+
+function safeToFile(logObject: ILogObject) {
+    appendFileSync("./src/lib/log/safeToFile.txt", JSON.stringify(logObject) + "\n");
+}
+  
+export const logger: Logger = new Logger();
+logger.attachTransport(
+{
+    silly: logToTransport,
+    debug: logToTransport,
+    trace: logToTransport,
+    info: logToTransport,
+    warn: safeToFile,
+    error: logToError,
+    fatal: logToError,
+},
+"debug"
+);
