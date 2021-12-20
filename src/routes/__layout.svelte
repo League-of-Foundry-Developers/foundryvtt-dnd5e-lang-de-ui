@@ -11,11 +11,20 @@
 </main>
 
 <footer>
-	<div class="">
-		<a href="/impressum">Impressum</a>
-		<a href="/datenschutz">Datenschutz</a>
+	<div class="footer-column">
+		<h2>Overview</h2>
+		<a href="/impressum" class="footer-link">Impressum</a>
+		<a href="/datenschutz" class="footer-link">Datenschutz</a>
 	</div>
-	<p>Ein FoundryVtt Community Projekt. Mehr Infos unter <a href="https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui">Github</a></p>
+	<div class="footer-column">
+		<h2>Community</h2>
+		<a href="https://discord.gg/ckJkgRcNRH" class="footer-link">Deutscher Community Server</a>
+	</div>
+	<div class="footer-column">
+		<h2>Projekt</h2>
+		<p class="footer-p">Ein FoundryVtt Community Projekt. Mehr Infos unter <a href="https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui">Github</a></p>
+		<p class="footer-p">Version 0.8</p>
+	</div>
 </footer>
 
 <style>

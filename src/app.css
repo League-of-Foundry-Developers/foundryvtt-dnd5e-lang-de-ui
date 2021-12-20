@@ -456,13 +456,31 @@ body {
 /* footer */
 footer {
 	border-top: 1px solid;
-	padding-top: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	padding: 10px 10px 0 10px;
+	background: var(--warlock-iris);
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 10px;
 }
 
 footer a {
-	font-weight: bold;
+	color: var(--active-color);
 }
+
+footer a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+.footer-column {
+	
+}
+
+.footer-link,
+.footer-p {
+	display: block;
+    margin: 0 0 5px 0;
+	line-height: 1;
+}
+
+

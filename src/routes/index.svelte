@@ -24,7 +24,7 @@ if ($isAuthenticated) {
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <div class="jumbotron">
-          <p>Diese Seite wurde erstellt um das DnD5e System und sein Kompendium vom Englischen ins Deutsche zu übersetzen.</p>
+          <p>Diese Seite wurde erstellt, um das DnD5e System und sein SRD-Kompendium in Foundry VTT vom Englischen ins Deutsche zu übersetzen.</p>
           <p>
             Wir haben es uns zur Aufgabe gemacht, allen Spielern einen einfachen Zugang zu den DnD5e Regeln, Zaubern, Gegenständen, Völkern, Monstern und Charakteren zu ermöglichen.
             Falls du uns unterstützen möchtest, registriere dich und hilf beim Übersetzen.
