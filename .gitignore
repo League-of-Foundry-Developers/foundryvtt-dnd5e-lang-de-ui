@@ -9,3 +9,5 @@ src/lib/log/changefrom.log
 src/lib/auth_config.ts
 
 src/lib/log/safefrom.log
+
+src/lib/log/
