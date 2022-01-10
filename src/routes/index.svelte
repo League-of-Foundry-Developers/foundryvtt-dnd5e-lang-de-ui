@@ -44,8 +44,7 @@ if ($isAuthenticated) {
     </div>
     <div>
       <p>
-        Großartig, dass du uns bei der Übersetzung von DnD unterstützen möchtest. 
-        Die Seite befindet sich aktuell in einer Beta, daher kann es zu kleinen Problemen kommen.
+        Großartig, dass du uns bei der Übersetzung von DnD unterstützen möchtest. Die Seite befindet sich aktuell in der Beta, daher kann es zu kleineren Problemen kommen. 
         Du hast einen Fehler entdeckt oder einen Vorschlag für Verbesserung? Dann erstelle bitte ein Issue:
         <a href="https://github.com/League-of-Foundry-Developers/foundryvtt-dnd5e-lang-de-ui/issues">github</a>
       </p>
@@ -54,10 +53,10 @@ if ($isAuthenticated) {
         <img src="/img/Eng-Deu.jpg" alt="example for page view" >
       </p>
       <p>
-        Einfach auf Edit gehen und man kann anfangen zu übersetzen.
+        Einfach auf Edit klicken und es kann losgehen.
       </p>
       <p>
-        Wir haben die Erlaubnis, die Texte aus dem Buch zu verwenden, wodurch es ein Zitat wird. Es muss aber immer die Buchseite angegeben werden.
+        Wir haben die Erlaubnis, die Texte aus dem Buch zu verwenden. Es muss lediglich immer die Buchseite angegeben werden.
       </p>
     </div>
 
