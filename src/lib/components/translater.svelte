@@ -82,15 +82,34 @@ function dontShowSafe(entry, index, name) {
 	safeJson(index, name);
 }
 
+const cancelEdit = async(index, name) => {
+	console.log(index, name);
+	cancelMessage = !cancelMessage;
+	safeIndex = index;
+	safeName = name;
+} 
+
 
 
 // when user cancel the change
 function cancelIt() {
-	showMessage = !showMessage;
+	if (showMessage) {
+		showMessage = !showMessage;
+		return
+	}
+	if (cancelMessage) {
+		cancelMessage = !cancelMessage;
+		return
+	}
 }
 
 function cancelShowIt() {
 	showSaveMessage = !showSaveMessage;
+}
+
+function closeEditor(index, name) {
+	cancelMessage = !cancelMessage;
+	safeJson(index, name);
 }
 
 async function safeAtJson(entry, index, name) {
@@ -142,6 +161,7 @@ async function finallySafeToJson(entry, index, name) {
 // showMessage
 let showMessage;
 let showSaveMessage;
+let cancelMessage;
 
 // on click set
 const shown = {
@@ -246,6 +266,17 @@ if ($isAuthenticated) {
 				</div>
 			</div>
 		{/if}
+		{#if cancelMessage}
+			<div class="overlay">
+				<div class="dialog-wp">
+					Wollen Sie wirklich die Bearbeitung Abbrechen?
+					<div class="dialog-btn-wp">
+						<button on:click={() => closeEditor(safeIndex, safeName)} class="btn btn--spacing">Ja</button>
+						<button on:click={() => cancelIt()} class="btn btn--spacing btn--color-switch">Nein</button>
+					</div>
+				</div>
+			</div>
+		{/if}
 		<h1 class="w-100">
 			Foundry VTT DnD5e übersetzung
 		</h1>
@@ -303,9 +334,12 @@ if ($isAuthenticated) {
 									</h3>
 										<input type="text" id="{item.id}" name="dtname" bind:value="{item.name}" disabled={!shown.name[i]}>
 										{#if $isAuthenticated}
-										<button on:click={() => handelClick(i, 'name')} class="btn">
-											{shown.name[i] ?'safe' : 'Edit'}
-										</button>
+										<div>
+											<button on:click={() => handelClick(i, 'name')} class="btn">
+												{shown.name[i] ?'safe' : 'Edit'}
+											</button>
+											<button on:click={() => cancelEdit(i, 'name')} hidden={!shown.name[i]} class="btn btn--color-cancel">Cancel</button>
+										</div>
 										{:else}
 											<button disabled>Edit</button>
 										{/if}
@@ -318,6 +352,7 @@ if ($isAuthenticated) {
 									<button on:click={() => handelClick(i, 'description')} class="btn" id="{file + '.description.' + [i]}">
 										{shown.description[i] ? 'safe' : 'Edit'}
 									</button>
+									<button on:click={() => cancelEdit(i, 'description')} hidden={!shown.description[i]} class="btn btn--color-cancel">Cancel</button>
 									{:else}
 										<button disabled>Edit</button>
 									{/if}
@@ -330,6 +365,7 @@ if ($isAuthenticated) {
 									<button on:click={() => handelClick(i, 'material')} class="btn" id="{file + '.material.' + [i]}">
 										{shown.material[i] ? 'safe' : 'Edit'}
 									</button>
+									<button on:click={() => cancelEdit(i, 'material')} hidden={!shown.material[i]} class="btn btn--color-cancel">Cancel</button>
 									{:else}
 									<button disabled>Edit</button>
 									{/if}
@@ -342,6 +378,7 @@ if ($isAuthenticated) {
 								<button on:click={() => handelClick(i, 'source')} class="btn">
 									{shown.source[i] ?'safe' : 'Edit'}
 								</button>
+								<button on:click={() => cancelEdit(i, 'source')} hidden={!shown.source[i]} class="btn btn--color-cancel">Cancel</button>
 								{:else}
 									<button disabled>Edit</button>
 								{/if}				
