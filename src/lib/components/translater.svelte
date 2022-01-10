@@ -307,7 +307,7 @@ if ($isAuthenticated) {
 											{shown.name[i] ?'safe' : 'Edit'}
 										</button>
 										{:else}
-											<button class="btn" on:click="{login}">{$isAuthenticated ? 'Edit' : 'Login'}</button>
+											<button class="btn" on:click="{login}">Edit</button>
 										{/if}
 								</div>
 							</div>
@@ -319,7 +319,7 @@ if ($isAuthenticated) {
 										{shown.description[i] ? 'safe' : 'Edit'}
 									</button>
 									{:else}
-										<button class="btn" on:click="{login}">{$isAuthenticated ? 'Edit' : 'Login'}</button>
+										<button class="btn" on:click="{login}">Edit</button>
 									{/if}
 							</div>
 							{#if filename === 'Zauber (SRD)'}
@@ -331,7 +331,7 @@ if ($isAuthenticated) {
 										{shown.material[i] ? 'safe' : 'Edit'}
 									</button>
 									{:else}
-										<button class="btn" on:click="{login}">{$isAuthenticated ? 'Edit' : 'Login'}</button>
+										<button class="btn" on:click="{login}">Edit</button>
 									{/if}
 								</div>
 							{/if}
@@ -343,7 +343,7 @@ if ($isAuthenticated) {
 									{shown.source[i] ?'safe' : 'Edit'}
 								</button>
 								{:else}
-									<button class="btn" on:click="{login}">{$isAuthenticated ? 'Edit' : 'Login'}</button>
+									<button class="btn" on:click="{login}">Edit</button>
 								{/if}				
 							</div>
 						</div>
