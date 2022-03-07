@@ -15,6 +15,7 @@
 	import Search from "$lib/components/Search.svelte";
 	import { hideTranslated, searchQuerry } from "$lib/stores/filter";
 	import { filterDescription } from "$lib/filter";
+import type { log } from 'util';
 
 	// import type {  } from  "tinymce";
 	export let file;
@@ -77,15 +78,11 @@
 
 	// when use dont want safe
 	function dontSafe(entry, index, name) {
-		// ToDo: Include copy to clipboard
-
 		showMessage = !showMessage;
 		safeJson(index, name);
 	}
 
 	function dontShowSafe(entry, index, name) {
-		// ToDo: Include copy to clipboard
-
 		showSaveMessage = !showSaveMessage;
 		safeJson(index, name);
 	}
@@ -127,13 +124,11 @@
 		}
 
 		entry.file = file;
-		// todo auslagern
 		const response = await fetch('/api.json?file=' + file);
 		const json = await response.json();
 		filename = json.label
 
 		
-		//ende todo 
 		var indexOfEntry = [];
 
 		// build the index
@@ -219,13 +214,16 @@
 		_searchQuerry = $searchQuerry
 	});
 
-	$: {
+	$: {		
 		processChange($searchQuerry);
+		if(loaded && $searchQuerry.length && event.key === 'Backspace') {
+			console.login('backspace')
+		}
 	}
 
 	let _hideTranslated = $hideTranslated;
 	$: {
-		if (loaded && (_hideTranslated !== $hideTranslated || _searchQuerry)) {
+		if (loaded && (_hideTranslated !== $hideTranslated || _searchQuerry)) {	
 			_hideTranslated = $hideTranslated
 			items = items.map((item) => {
 				item.hidden = filterDescription({
