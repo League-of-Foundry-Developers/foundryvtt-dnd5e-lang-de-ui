@@ -176,6 +176,11 @@ button:focus:not(:focus-visible) {
 	background: var(--rogue-ash); 
 }
 
+.header {
+	position: sticky;
+	top: 0;
+}
+
 /* btn styling */
 .btn {
 	border-radius: 5px;
