@@ -12,6 +12,7 @@ export function setCookie(cname, cvalue, exdays) {
   }
 
 export function readCookie(request) {
+  try {
     const cookies = {};
     if (!request.headers.cookie) return '';
     request.headers.cookie.split(';').forEach(function(cookie) {
@@ -19,4 +20,9 @@ export function readCookie(request) {
     cookies[ parts[1].trim() ] = (parts[2] || '').trim();
     });
     return cookies;
+  }
+  catch {
+    const cookie = 'unknown user';
+    return  cookie;
+  }
 }
