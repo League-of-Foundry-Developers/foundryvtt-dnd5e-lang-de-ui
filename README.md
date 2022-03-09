@@ -8,8 +8,7 @@ True to the idea of providing translation from a Foundry VTT gaming system as si
 - [Customizable](#customizable)
 - [Developing](#developing)
 - [Question](#question)
-
-
+- 
 ---------------------------------------------
 ## foundryvtt-dnd5e-lang-de-ui
 
@@ -25,7 +24,6 @@ This is a Release Version.
 When you have interesst to help to Translate, write me on Discord. You find me under crash#7509
 
 You have interesst to help to Develop this Project, than fork please this Project and after you work, create Merge Request.
-
 
 -----------------------------------
 ## Customizable
