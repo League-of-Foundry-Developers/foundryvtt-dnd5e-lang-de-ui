@@ -176,6 +176,11 @@ button:focus:not(:focus-visible) {
 	background: var(--rogue-ash); 
 }
 
+.header {
+	position: sticky;
+	top: 0;
+}
+
 /* btn styling */
 .btn {
 	border-radius: 5px;
@@ -285,6 +290,7 @@ body {
 	margin: 0 auto;
 	max-width: 1024px;
 }
+
 .nav {
 	display: flex;
 	background-color: var(--nav-color);
@@ -306,7 +312,7 @@ body {
 }
 
 .nav-burger-menu-inner:hover {
-	 height: 300px;
+	 height: 410px;
 	 transition: all .4s ease-in-out;
 }
 
@@ -322,6 +328,7 @@ body {
 
 .nav-burger-menu-link {
 	transition: all .2s ease-in-out;
+	padding: 6px 0;
 }
 
 .nav-burger-menu-link.active {
@@ -408,7 +415,9 @@ body {
 	.nav-burger-menu-wp {
 		display: flex;
 	}
-
+	.nav-burger-menu-link.active .nav-menu-link {
+		color:#000;
+	}
 
 }
 @media screen and (min-width: 1077px) {
@@ -426,3 +435,115 @@ body {
 	box-shadow: 0 0 2px 1px #000;
 	background-color: var(--active-color);
 }
+
+/* body styling */
+@media screen and (max-width: 1024px) {
+	.de-translation {
+		border-bottom: 1px dotted;
+		margin-bottom: 30px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.en-translation {
+		max-width: 50%;
+	}
+}
+
+/* loading spinner */
+.loading-spinner {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* footer */
+footer {
+	border-top: 1px solid;
+	padding: 10px 10px 0 10px;
+	background: var(--warlock-iris);
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	column-gap: 10px;
+}
+
+footer a {
+	color: var(--active-color);
+}
+
+footer a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+.footer-link,
+.footer-p {
+	display: block;
+    margin: 0 0 5px 0;
+	line-height: 1;
+}
+
+/* Filter Styling */
+.filter {
+	display: flex;
+	justify-content: space-evenly;
+	padding: 15px 0;
+	align-items: center;
+}
+
+.search-area-label {
+	font-weight: block;
+}
+
+.input-filter {
+	border: 1px bottom;
+    border-width: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    padding: 5px 2px;
+}
+
+.filter-btn-wp {	
+    border: 2px solid #000;
+	background-color: var(--monk-sky);
+	color: var(--pure-white);
+    position: relative;
+	font-weight: 700;
+	box-shadow: 1px -1px 2px 0px #000
+}
+
+.filter-btn-wp:hover {
+	background-color: var(--wizard-cobalt);
+}
+.filter-btn-checkbox {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.filter-btn-text {
+	background-color: transparent;	
+	padding: 7px;
+}
+
+
+.filter-btn-checkbox:checked + .filter-btn-text{
+	background-color: var(--nav-color);
+}
+
+/* screenreader class */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+  }

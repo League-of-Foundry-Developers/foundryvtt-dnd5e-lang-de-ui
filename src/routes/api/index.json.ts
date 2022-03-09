@@ -4,6 +4,8 @@ import { dev } from '$app/env';
 import * as fs from 'fs';
 // import * as path from 'path';
 import path from 'path';
+import { readCookie, translatorUser } from '$lib/cookie';
+import { logger } from '$lib/logger';
 const dirname = path.resolve('./');
 
 const projectRoot = path.join(dirname, dev ? 'static/compendium' : 'srv/translator/build/assets/compendium');
@@ -34,6 +36,8 @@ export const post: RequestHandler<Locals, string> = async (request) => {
     delete update.file;
     const file = readFile(fileName);
     const json = JSON.parse(file);
+
+    logger.warn('user', readCookie(request)[translatorUser], 'save to file', fileName, '. Change follow element', json.entries[update.id]);
     
     // new files, some entfernen
     if (json.entries[update.id]) {

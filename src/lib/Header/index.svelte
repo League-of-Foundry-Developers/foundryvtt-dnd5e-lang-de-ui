@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page, navigating } from '$app/stores';
 	import { isAuthenticated, login, logout } from '$lib/auth';
-	import { user } from '$lib/store';
+	import { user, visibleSpinner } from '$lib/store';
+
 </script>
 
-<header>
-	
-
+<header class="header">
 	<nav class="nav">
 		<div class="nav-burger-menu-wp">
 			<div class="nav-burger-menu-inner">
