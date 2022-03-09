@@ -2,285 +2,266 @@
 	export const prerender = true;
 </script>
 <script lang="ts">
-import { onMount } from "svelte";
-import { browser } from "$app/env";
-import { isAuthenticated, login } from "$lib/auth";
-import { user } from "$lib/store";
-import { setCookie, translatorUser } from "$lib/cookie";
+	import YouWantCancel from '$lib/components/YouWantCancel.svelte';
+	import FeeldNotEmpty from '$lib/components/FeeldNotEmpty.svelte';
+	import YouWantSave from '$lib/components/YouWantSave.svelte';
+	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 
-// import type {  } from  "tinymce";
-export let file;
-export let dbFile;
+	import { onMount } from "svelte";
+	import { browser } from "$app/env";
+	import { isAuthenticated, login } from "$lib/auth";
+	import { user } from "$lib/store";
+	import { setCookie, translatorUser } from "$lib/cookie";
+	import Search from "$lib/components/Search.svelte";
+	import { hideTranslated, searchQuerry } from "$lib/stores/filter";
+	import { filterDescription } from "$lib/filter";
+import type { log } from 'util';
 
-let items = [];
-let filename = [];
-let editorTiny;
-let inputHTML;
-let dbjson = [];
-let safeIndex;
-let safeName;
-let safeInput;
-let safeEntry;
-let oldValue;
-let loaded = false;
-let minTimeLoadDone = false;
+	// import type {  } from  "tinymce";
+	export let file;
+	export let dbFile;
 
-$:showLoadingSpinner = !(loaded && minTimeLoadDone);
+	let items = [];
+	let filename = [];
+	let editorTiny;
+	let inputHTML;
+	let dbjson = [];
+	let safeIndex;
+	let safeName;
+	let safeInput;
+	let safeEntry;
+	let oldValue;
+	let loaded = false;
+	let minTimeLoadDone = false;
 
-// safe input
-const handelClick = async(index, name) => {
+	$:showLoadingSpinner = !(loaded && minTimeLoadDone);
 
-	if (shown[name][index]) {
+	// safe input
+	const handelClick = async(index, name) => {
+
+		if (shown[name][index]) {
+			showMessage = !showMessage;
+			safeIndex = index;
+			safeName = name;
+			safeInput = items[index];
+			return
+		}
+		if (!shown[name][index]) {
+			oldValue = items[index][name];
+			safeJson(index, name);
+			return
+		}
+	}
+
+
+	function safeJson(index, name) {
+		shown[name][index] = !shown[name][index];
+		if (name !== 'description') return;
+		if (editorTiny) {
+			tinymce.activeEditor.remove();
+			editorTiny = null;
+			inputHTML = null;
+		}
+		if (shown[name][index]) {
+			editorTiny = 'div.description' + index;
+			tinymce.init({
+			selector: editorTiny,
+			plugins: 'autolink lists advlist table',
+			toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+			entity_encoding : "raw",
+			height: '350',
+			removed_menuitems: 'newdocument',
+			});
+		}
+		
+	}
+
+	// when use dont want safe
+	function dontSafe(entry, index, name) {
 		showMessage = !showMessage;
+		safeJson(index, name);
+	}
+
+	function dontShowSafe(entry, index, name) {
+		showSaveMessage = !showSaveMessage;
+		safeJson(index, name);
+	}
+
+	const cancelEdit = async(index, name) => {
+		cancelMessage = !cancelMessage;
 		safeIndex = index;
 		safeName = name;
-		safeInput = items[index];
-		return
-	}
-	if (!shown[name][index]) {
-		oldValue = items[index][name];
-		safeJson(index, name);
-		return
-	}
-}
-
-
-function safeJson(index, name) {
-	shown[name][index] = !shown[name][index];
-	if (name !== 'description') return;
-	if (editorTiny) {
-		tinymce.activeEditor.remove();
-		editorTiny = null;
-		inputHTML = null;
-	 }
-	if (shown[name][index]) {
-		 editorTiny = 'div.description' + index;
-		 tinymce.init({
-		 selector: editorTiny,
-		 plugins: 'autolink lists advlist table',
-		 toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-		 entity_encoding : "raw",
-		 height: '350',
-		 removed_menuitems: 'newdocument',
-		});
-	}
-	
-}
-
-// when use dont want safe
-function dontSafe(entry, index, name) {
-	// ToDo: Include copy to clipboard
-
-	showMessage = !showMessage;
-	safeJson(index, name);
-}
-
-function dontShowSafe(entry, index, name) {
-	// ToDo: Include copy to clipboard
-
-	showSaveMessage = !showSaveMessage;
-	safeJson(index, name);
-}
-
-const cancelEdit = async(index, name) => {
-	console.log(index, name);
-	cancelMessage = !cancelMessage;
-	safeIndex = index;
-	safeName = name;
-} 
+	} 
 
 
 
-// when user cancel the change
-function cancelIt() {
-	if (showMessage) {
-		showMessage = !showMessage;
-		return
-	}
-	if (cancelMessage) {
-		cancelMessage = !cancelMessage;
-		return
-	}
-}
-
-function cancelShowIt() {
-	showSaveMessage = !showSaveMessage;
-}
-
-function closeEditor(index, name) {
-	cancelMessage = !cancelMessage;
-	safeJson(index, name);
-}
-
-async function safeAtJson(entry, index, name) {
-	
-	if (editorTiny) {
-		inputHTML = tinymce.activeEditor.getContent();	
-		entry.description = inputHTML;
+	// when user cancel the change
+	function cancelIt() {
+		if (showMessage) {
+			showMessage = !showMessage;
+			return
+		}
+		if (cancelMessage) {
+			cancelMessage = !cancelMessage;
+			return
+		}
 	}
 
-	entry.file = file;
-	// todo auslagern
-	const response = await fetch('/api.json?file=' + file);
-	const json = await response.json();
-	filename = json.label
-
-	
-	//ende todo 
-	var indexOfEntry = [];
-
-	// build the index
-	for (var x in json.entries) {
-		indexOfEntry.push(x);
-	}
-	
-	const newValue = json.entries[indexOfEntry[index]][name]
- 
-
-	 if (entry[name] !== newValue) {
-		safeEntry = entry;
-		showMessage = !showMessage;
+	function cancelShowIt() {
 		showSaveMessage = !showSaveMessage;
-		return 
-	 }
+	}
 
-	showMessage = !showMessage;
-	finallySafeToJson(entry, index, name)
-}
+	function closeEditor(index, name) {
+		cancelMessage = !cancelMessage;
+		safeJson(index, name);
+	}
 
-// final safe function
-async function finallySafeToJson(entry, index, name) {
-	var data = JSON.stringify(entry);
-	// ToDo Try Catcher
-	const result = await fetch(`/api.json`, {method:'POST', body: data});
-	
-	if (showSaveMessage) showSaveMessage = !showSaveMessage;
-	safeJson(index, name);	
-}
+	async function safeAtJson(entry, index, name) {
+		
+		if (editorTiny) {
+			inputHTML = tinymce.activeEditor.getContent();	
+			entry.description = inputHTML;
+		}
 
-// showMessage
-let showMessage;
-let showSaveMessage;
-let cancelMessage;
+		entry.file = file;
+		const response = await fetch('/api.json?file=' + file);
+		const json = await response.json();
+		filename = json.label
 
-// on click set
-const shown = {
-	description : [],
-	name: [],
-	material: [],
-	source: [],
-};
-// const section
+		
+		var indexOfEntry = [];
 
-onMount(async () => {
-	setTimeout(() => {
-		minTimeLoadDone = true;
-	}, 1500)
-	const response = await fetch('/api.json?file=' + file);
-	const json = await response.json();
-	filename = json.label
-	
-	const dbRespronce = await fetch('/api/db.json?file=' + dbFile);
-	dbjson = await dbRespronce.json();
+		// build the index
+		for (var x in json.entries) {
+			indexOfEntry.push(x);
+		}
+		
+		const newValue = json.entries[indexOfEntry[index]][name]
 	
 
-	items = Object.entries(json.entries)
-		.map(([key, value]) => {
-			const item =  Object.assign(value, {id: key})
-			item.original = dbjson.find(dbitem => dbitem.name === item.id) || {};
-			return item;
-		});	
+		if (entry[name] !== newValue) {
+			safeEntry = entry;
+			showMessage = !showMessage;
+			showSaveMessage = !showSaveMessage;
+			return 
+		}
+
+		showMessage = !showMessage;
+		finallySafeToJson(entry, index, name)
+	}
+
+	// final safe function
+	async function finallySafeToJson(entry, index, name) {
+		var data = JSON.stringify(entry);
+		// ToDo Try Catcher
+		const result = await fetch(`/api.json`, {method:'POST', body: data});
+		
+		if (showSaveMessage) showSaveMessage = !showSaveMessage;
+		safeJson(index, name);	
+	}
+
+	// showMessage
+	let showMessage;
+	let showSaveMessage;
+	let cancelMessage;
+
+	// on click set
+	const shown = {
+		description : [],
+		name: [],
+		material: [],
+		source: [],
+	};
+	// const section
+
+	onMount(async () => {
+		setTimeout(() => {
+			minTimeLoadDone = true;
+		}, 1500)
+		const response = await fetch('/api.json?file=' + file);
+		const json = await response.json();
+		filename = json.label
+		
+		const dbRespronce = await fetch('/api/db.json?file=' + dbFile);
+		dbjson = await dbRespronce.json();
+		
+
+		items = Object.entries(json.entries)
+			.map(([key, value]) => {
+				const item =  Object.assign(value, {id: key})
+				item.original = dbjson.find(dbitem => dbitem.name === item.id) || {};
+				return item;
+			});	
 		loaded = true;
-});
+	});
 
-if ($isAuthenticated) {
-  if ($user) {
-    setCookie(translatorUser, $user.email, 10);
-  }
-}
+	if ($isAuthenticated) {
+		if ($user) {
+			setCookie(translatorUser, $user.email, 10);
+		}
+	}
 
-</script>
+	let _searchQuerry;
 
-<svelte:head>
-	<title>Home</title>
-	<script src="https://cdn.tiny.cloud/1/jcfc13nqyrjanwpgd08llef4luoku40aislurpyrwhsltgc2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-</svelte:head>
+	function debounce(func, timeout = 300){
+		let timer;
+		return (...args) => {
+			clearTimeout(timer);
+			timer = setTimeout(() => { func.apply(this, args); }, timeout);
+		};
+	}
+	const processChange = debounce(() => {
+		_searchQuerry = $searchQuerry
+	});
+
+	$: {		
+		processChange($searchQuerry);
+	}
+
+	let _hideTranslated = $hideTranslated;
+	$: {
+		if (loaded && (_hideTranslated !== $hideTranslated || _searchQuerry !== $searchQuerry)) {	
+			_hideTranslated = $hideTranslated
+			items = items.map((item) => {
+				item.hidden = filterDescription({
+					item,
+					hideTranslated: $hideTranslated,
+					searchQuerry: _searchQuerry,
+				});
+		
+				return item;
+			})
+		}
+	}
+
+	</script>
+
+	<svelte:head>
+		<title>Home</title>
+		<script src="https://cdn.tiny.cloud/1/jcfc13nqyrjanwpgd08llef4luoku40aislurpyrwhsltgc2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	</svelte:head>
 
 <section>
 	
 	
 	{#if showLoadingSpinner}		
-		<div class="overlay">
-			<div class="loading-spinner">
-				<div class="loading-spinner-inner">
-					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255, 0); display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-					<g>
-					<circle cx="60" cy="50" r="4" fill="#e15b64">
-						<animate attributeName="cx" repeatCount="indefinite" dur="1s" values="95;35" keyTimes="0;1" begin="-0.67s"></animate>
-						<animate attributeName="fill-opacity" repeatCount="indefinite" dur="1s" values="0;1;1" keyTimes="0;0.2;1" begin="-0.67s"></animate>
-					</circle>
-					<circle cx="60" cy="50" r="4" fill="#e15b64">
-						<animate attributeName="cx" repeatCount="indefinite" dur="1s" values="95;35" keyTimes="0;1" begin="-0.33s"></animate>
-						<animate attributeName="fill-opacity" repeatCount="indefinite" dur="1s" values="0;1;1" keyTimes="0;0.2;1" begin="-0.33s"></animate>
-					</circle>
-					<circle cx="60" cy="50" r="4" fill="#e15b64">
-						<animate attributeName="cx" repeatCount="indefinite" dur="1s" values="95;35" keyTimes="0;1" begin="0s"></animate>
-						<animate attributeName="fill-opacity" repeatCount="indefinite" dur="1s" values="0;1;1" keyTimes="0;0.2;1" begin="0s"></animate>
-					</circle>
-					</g><g transform="translate(-15 0)">
-					<path d="M50 50L20 50A30 30 0 0 0 80 50Z" fill="#f8b26a" transform="rotate(90 50 50)"></path>
-					<path d="M50 50L20 50A30 30 0 0 0 80 50Z" fill="#f8b26a">
-						<animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;45 50 50;0 50 50" keyTimes="0;0.5;1"></animateTransform>
-					</path>
-					<path d="M50 50L20 50A30 30 0 0 1 80 50Z" fill="#f8b26a">
-						<animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;-45 50 50;0 50 50" keyTimes="0;0.5;1"></animateTransform>
-					</path>
-					</g>
-					<!-- [ldio] generated by https://loading.io/ --></svg>
-				</div>
-			</div>
-		</div>
+		<LoadingSpinner />
 	{/if}
 	<div class="main" class:active = {!showLoadingSpinner}>
 		{#if showMessage}
-			<div class="overlay">
-				<div class="dialog-wp">
-					Wollen Sie den Text speichern?
-					<div class="dialog-btn-wp">
-						<button on:click={() => safeAtJson(safeInput, safeIndex, safeName)} class="btn btn--spacing">ja</button>
-						<button on:click={() => dontSafe(safeInput, safeIndex, safeName)} class="btn btn--spacing btn--color-switch">nein</button>
-						<button on:click={() => cancelIt()} class="btn btn--spacing btn--color-cancel">Abbrechen</button>
-					</div>
-				</div>
-			</div>
+			<YouWantSave saveClose = {() => safeAtJson(safeInput, safeIndex, safeName)}	notSave = {() => dontSafe(safeInput, safeIndex, safeName)} closeThis = {() => cancelIt()}></YouWantSave>
 		{/if}
 		{#if showSaveMessage}
-			<div class="overlay">
-				<div class="dialog-wp">
-					Es ist schon Text vorhanden, wollen Sie diesen ändern?
-					<div class="dialog-btn-wp">
-						<button on:click={() => finallySafeToJson(safeEntry, safeIndex, safeName)} class="btn btn--spacing">ja</button>
-						<button on:click={() => dontShowSafe(safeEntry, safeIndex, safeName)} class="btn btn--spacing btn--color-switch">nein</button>
-						<button on:click={() => cancelShowIt()} class="btn btn--spacing btn--color-cancel">Abbrechen</button>
-					</div>
-				</div>
-			</div>
+			<FeeldNotEmpty finalSave = {() => finallySafeToJson(safeEntry, safeIndex, safeName)} dontShow = {() => dontShowSafe(safeEntry, safeIndex, safeName)} closeShow = {() => cancelShowIt()}></FeeldNotEmpty>
 		{/if}
 		{#if cancelMessage}
-			<div class="overlay">
-				<div class="dialog-wp">
-					Wollen Sie wirklich die Bearbeitung Abbrechen?
-					<div class="dialog-btn-wp">
-						<button on:click={() => closeEditor(safeIndex, safeName)} class="btn btn--spacing">Ja</button>
-						<button on:click={() => cancelIt()} class="btn btn--spacing btn--color-switch">Nein</button>
-					</div>
-				</div>
-			</div>
+			<YouWantCancel close = {() => closeEditor(safeIndex, safeName)} cancel = {() => cancelIt()}></YouWantCancel>
 		{/if}
 		<h1 class="w-100">
 			Foundry VTT DnD5e übersetzung
 		</h1>
 		<h2 class="w-100 f-20 text-center">{filename}</h2>
+		<Search></Search>
 		<div class="wrapper space-around">
 			
 			<div class="en">
@@ -292,14 +273,15 @@ if ($isAuthenticated) {
 		</div>
 		<div>
 			{#each items as item, i}
+			{#if !item?.hidden}
 				<div class="flex">
 					<div class="en-translation">
 						<div class="container">
 							<div class="en-div">
 								<h3>Orignal Name</h3>
-								{item.original.name}
+								{item?.original?.name}
 							</div>
-							<div class="description">
+							<div class="description-en">
 								<h3>Orignal Text</h3>								
 									{@html item?.original?.data?.details?.biography?.value ?? ''}	
 								{#if filename === 'Regeln (SRD)'}
@@ -387,6 +369,7 @@ if ($isAuthenticated) {
 					</div>
 		
 				</div>
+			{/if}
 			{/each}
 
 		</div>

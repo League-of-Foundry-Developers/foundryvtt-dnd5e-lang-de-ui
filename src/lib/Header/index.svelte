@@ -5,7 +5,7 @@
 
 </script>
 
-<header>
+<header class="header">
 	<nav class="nav">
 		<div class="nav-burger-menu-wp">
 			<div class="nav-burger-menu-inner">
