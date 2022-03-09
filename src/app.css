@@ -464,7 +464,7 @@ footer {
 	padding: 10px 10px 0 10px;
 	background: var(--warlock-iris);
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	column-gap: 10px;
 }
 
@@ -484,4 +484,66 @@ footer a:hover {
 	line-height: 1;
 }
 
+/* Filter Styling */
+.filter {
+	display: flex;
+	justify-content: space-evenly;
+	padding: 15px 0;
+	align-items: center;
+}
 
+.search-area-label {
+	font-weight: block;
+}
+
+.input-filter {
+	border: 1px bottom;
+    border-width: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    padding: 5px 2px;
+}
+
+.filter-btn-wp {	
+    border: 2px solid #000;
+	background-color: var(--monk-sky);
+	color: var(--pure-white);
+    position: relative;
+	font-weight: 700;
+	box-shadow: 1px -1px 2px 0px #000
+}
+
+.filter-btn-wp:hover {
+	background-color: var(--wizard-cobalt);
+}
+.filter-btn-checkbox {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.filter-btn-text {
+	background-color: transparent;	
+	padding: 7px;
+}
+
+
+.filter-btn-checkbox:checked + .filter-btn-text{
+	background-color: var(--nav-color);
+}
+
+/* screenreader class */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+  }

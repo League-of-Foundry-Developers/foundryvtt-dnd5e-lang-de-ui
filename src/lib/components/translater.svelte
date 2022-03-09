@@ -216,14 +216,11 @@ import type { log } from 'util';
 
 	$: {		
 		processChange($searchQuerry);
-		if(loaded && $searchQuerry.length && event.key === 'Backspace') {
-			console.login('backspace')
-		}
 	}
 
 	let _hideTranslated = $hideTranslated;
 	$: {
-		if (loaded && (_hideTranslated !== $hideTranslated || _searchQuerry)) {	
+		if (loaded && (_hideTranslated !== $hideTranslated || _searchQuerry !== $searchQuerry)) {	
 			_hideTranslated = $hideTranslated
 			items = items.map((item) => {
 				item.hidden = filterDescription({
