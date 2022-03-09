@@ -533,7 +533,7 @@ footer a:hover {
 
 
 .filter-btn-checkbox:checked + .filter-btn-text{
-	background-color: var(--nav-color);
+	background-color: var(--ddb-red);
 }
 
 /* screenreader class */
