@@ -220,14 +220,14 @@
 	let _hideTranslated = $hideTranslated;
 	$: {
 	
-		if(_searchQuerry === '') console.log('null');
-		console.log('_search', _searchQuerry);
-		console.log('$search', $searchQuerry);
+		// if(_searchQuerry === '') console.log('null');
+		// console.log('_search', _searchQuerry);
+		// console.log('$search', $searchQuerry);
 		
-		console.log('##################################');		
+		// console.log('##################################');		
 
 		if (loaded && (_hideTranslated !== $hideTranslated || _searchQuerry !== $searchQuerry || _searchQuerry === '')) {
-			console.log('intern', _searchQuerry);
+			// console.log('intern', _searchQuerry);
 			
 			_hideTranslated = $hideTranslated
 			items = items.map((item) => {
