@@ -8,11 +8,11 @@ export function filterDescription({item, hideTranslated, searchQuerry}) {
         && ((material?.length ?? 1) > 0)
         && ((source?.length ?? 0) > 0);
     
+    searchQuerry = searchQuerry || '';
+
     const searchShow = (name ?? '').toLowerCase().includes(searchQuerry.toLowerCase())
         || id.toLowerCase().includes(searchQuerry.toLowerCase())
     
-    // console.log('trans', translatedHidden);
-    // console.log('search', !searchShow)
     
     return  translatedHidden || !searchShow;
 }

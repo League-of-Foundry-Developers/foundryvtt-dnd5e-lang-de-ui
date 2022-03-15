@@ -15,7 +15,6 @@
 	import Search from "$lib/components/Search.svelte";
 	import { hideTranslated, searchQuerry } from "$lib/stores/filter";
 	import { filterDescription } from "$lib/filter";
-import type { log } from 'util';
 
 	// import type {  } from  "tinymce";
 	export let file;
@@ -220,7 +219,16 @@ import type { log } from 'util';
 
 	let _hideTranslated = $hideTranslated;
 	$: {
-		if (loaded && (_hideTranslated !== $hideTranslated || _searchQuerry !== $searchQuerry)) {	
+	
+		// if(_searchQuerry === '') console.log('null');
+		// console.log('_search', _searchQuerry);
+		// console.log('$search', $searchQuerry);
+		
+		// console.log('##################################');		
+
+		if (loaded && (_hideTranslated !== $hideTranslated || _searchQuerry !== $searchQuerry || _searchQuerry === '')) {
+			// console.log('intern', _searchQuerry);
+			
 			_hideTranslated = $hideTranslated
 			items = items.map((item) => {
 				item.hidden = filterDescription({
