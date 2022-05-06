@@ -21,12 +21,15 @@
 					<div class="nav-burger-menu-link" class:active={$page.path === '/items'}><a class="nav-menu-link" sveltekit:prefetch href="/items">Gegenstände</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/tradegoods'}><a class="nav-menu-link" sveltekit:prefetch href="/tradegoods">Handelsgüter</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/heroes'}><a class="nav-menu-link" sveltekit:prefetch href="/heroes">Helden</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/backgrounds'}><a class="nav-menu-link" sveltekit:prefetch href="/backgrounds">Hintergründe</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/classes'}><a class="nav-menu-link" sveltekit:prefetch href="/classes">Klassen</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/classfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/classfeatures">Klassenfähigkeiten</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/monster'}><a class="nav-menu-link" sveltekit:prefetch href="/monster">Monster</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/monsterfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/monsterfeatures">Monsterfähigkeiten</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/rules'}><a class="nav-menu-link" sveltekit:prefetch href="/rules">Regeln</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/subclasses'}><a class="nav-menu-link" sveltekit:prefetch href="/subclasses">Unterklassen</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/races'}><a class="nav-menu-link" sveltekit:prefetch href="/races">Völker</a></div>
+					<div class="nav-burger-menu-link" class:active={$page.path === '/tables'}><a class="nav-menu-link" sveltekit:prefetch href="/tables">Würfel Tabelle</a></div>
 					<div class="nav-burger-menu-link" class:active={$page.path === '/spells'}><a class="nav-menu-link" sveltekit:prefetch href="/spells">Zauber</a></div>
 				</div>
 			</div>
@@ -36,12 +39,15 @@
 			<div class="nav-menu-inner" class:active={$page.path === '/items'}><a class="nav-menu-link" sveltekit:prefetch href="/items">Gegenstände</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/tradegoods'}><a class="nav-menu-link" sveltekit:prefetch href="/tradegoods">Handelsgüter</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/heroes'}><a class="nav-menu-link" sveltekit:prefetch href="/heroes">Helden</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/backgrounds'}><a class="nav-menu-link" sveltekit:prefetch href="/backgrounds">Hintergründe</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/classes'}><a class="nav-menu-link" sveltekit:prefetch href="/classes">Klassen</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/classfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/classfeatures">Klassenfähigkeiten</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/monster'}><a class="nav-menu-link" sveltekit:prefetch href="/monster">Monster</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/monsterfeatures'}><a class="nav-menu-link" sveltekit:prefetch href="/monsterfeatures">Monsterfähigkeiten</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/rules'}><a class="nav-menu-link" sveltekit:prefetch href="/rules">Regeln</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/subclasses'}><a class="nav-menu-link" sveltekit:prefetch href="/subclasses">Unterklassen</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/races'}><a class="nav-menu-link" sveltekit:prefetch href="/races">Völker</a></div>
+			<div class="nav-menu-inner" class:active={$page.path === '/tables'}><a class="nav-menu-link" sveltekit:prefetch href="/tables">Würfel Tabelle</a></div>
 			<div class="nav-menu-inner" class:active={$page.path === '/spells'}><a class="nav-menu-link" sveltekit:prefetch href="/spells">Zauber</a></div>
 		</div>
 		<div class="nav-menu-user-wp">
