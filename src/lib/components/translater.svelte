@@ -246,7 +246,7 @@
 
 	<svelte:head>
 		<title>Home</title>
-		<script src="https://cdn.tiny.cloud/1/jcfc13nqyrjanwpgd08llef4luoku40aislurpyrwhsltgc2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+		<script src="https://cdn.tiny.cloud/1/jcfc13nqyrjanwpgd08llef4luoku40aislurpyrwhsltgc2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	</svelte:head>
 
 <section>
