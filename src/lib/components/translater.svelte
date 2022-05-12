@@ -362,7 +362,10 @@
 								</div>
 							{/if}
 							{#if filename === 'Würfel Tabelle'}
-
+								<div class="">
+									<h3>Würfel Text</h3>
+									
+								</div>
 							{/if}
 							<div class="de-source">
 								<h3>Seite im Buch</h3>
