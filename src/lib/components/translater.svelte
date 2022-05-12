@@ -361,6 +361,9 @@
 									{/if}
 								</div>
 							{/if}
+							{#if filename === 'Würfel Tabelle'}
+
+							{/if}
 							<div class="de-source">
 								<h3>Seite im Buch</h3>
 								<input type="text" id="{'source ' + [i]}" name="dtsource" bind:value="{item.source}" disabled={!shown.source[i]}>
